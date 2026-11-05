@@ -38,12 +38,13 @@ for cls in H["classes"]:
         assert b["class"] == cid
         assert b.get("summaryTag") in TAGS, f"{cid}: summaryTag"
         assert b["subclassVerdict"]["pick"] in cls["subclasses"] + [None], f"{cid}: verdict pick"
+        check_tag(b["subclassVerdict"], f"{cid} verdict")
         assert {x["subclass"] for x in b["builds"]} == set(cls["subclasses"]), f"{cid}: one build per subclass"
         for build in b["builds"]:
             where = f"{cid}/{build['subclass']}"
             ab = build["armorAbility"]["id"].upper()
             assert ab in ABIL and cid in ABIL[ab]["classes"], f"{where}: ability {ab}"
-            check_tag(build["armorAbility"] | {"quote": build["armorAbility"].get("quote", "x")}, where + " ability")
+            check_tag(build["armorAbility"], where + " ability")
             owned = {1: set(cls["talents"]["t1"]), 2: set(cls["talents"]["t2"]),
                      3: set(cls["talents"]["t3"]) | set(SUB[build["subclass"]]["talents"]),
                      4: set(ABIL[ab]["talents"]) | SHARED_T4}

@@ -4,7 +4,7 @@
   "summaryTag": "추정",
   "subclassVerdict": {
     "pick": "CHAMPION",
-    "why": "충전 상한 10(기본 8), 충전 속도 1.5배에 두 무기 능력을 함께 씀. 수도사는 v4.0 변경이 금고 한정",
+    "why": "충전 상한 10(기본 8), 충전 속도 1.5배에 두 무기 능력을 함께 씀. 수도사의 v4.0 변경은 부활·금고 진입 시 에너지 초기화뿐",
     "tag": "코드 계산",
     "quote": "core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/melee/MeleeWeapon.java:435 chargeToGain *= 1.5f (CHAMPION); :485 min(10, 4 + (lvl-1)/3)"
   },

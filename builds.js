@@ -105,7 +105,7 @@
       h('div', { class: 'tier-h' }, h('span', {}, '갑옷 능력'), h('span', { class: 't5' }, 'Lv21+ · 드워프 제왕의 왕관')),
       h('div', { class: 'talent' }, rectSprite('heroes', ab.rect),
         h('div', { class: 'tn' }, h('span', { 'data-tip': plain(ab.desc_ko) }, ab.name_ko), tag(b.armorAbility.tag)),
-        h('div', { class: 'why' }, b.armorAbility.why)),
+        h('div', { class: 'why' }, b.armorAbility.why, b.armorAbility.quote ? h('span', { class: 'dim' }, ` — “${quoteText(b.armorAbility.quote)}”`) : null)),
       ...tierBlock(4),
       b.bonus && b.bonus.length ? h('div', {},
         h('div', { class: 'tier-h' }, h('span', {}, '신성한 영감의 물약 (+2)'), h('span', { class: 't5' }, '티어당 1회')),
@@ -132,7 +132,7 @@
       h('div', { class: 'small' }, '시작 장비: ', (cls.startItems || []).map((i) => i.name_ko).filter(Boolean).join(', '), ' ', srcLink(cls.src)),
       B ? [
         h('p', { style: 'margin-top:calc(4*var(--u))' }, B.summary, tag(B.summaryTag)),
-        h('p', { class: 'small' }, '서브클래스 추천: ', h('span', { class: 'hl' }, SUB[B.subclassVerdict.pick]?.name_ko || '상황에 따라'), ' — ', B.subclassVerdict.why, tag(B.subclassVerdict.tag)),
+        h('p', { class: 'small' }, '서브클래스 추천: ', h('span', { class: 'hl' }, SUB[B.subclassVerdict.pick]?.name_ko || '상황에 따라'), ' — ', B.subclassVerdict.why, B.subclassVerdict.quote ? h('span', { class: 'dim' }, ` — “${quoteText(B.subclassVerdict.quote)}”`) : null, tag(B.subclassVerdict.tag)),
         h('div', { class: 'builds' }, ...B.builds.map((b) => buildCard(cls, b, B.subclassVerdict.pick))),
       ] : h('p', { class: 'pending' }, '빌드 작성 중입니다.'),
       h('details', { class: 'all' }, h('summary', { class: 't6' }, `${cls.name_ko} 특성 전체 보기 (${allTalents.length}개)`),
@@ -187,7 +187,7 @@
     h('div', { class: 'scroll-x' }, h('table', {},
       h('thead', {}, h('tr', {}, ...['무기', '티어', '힘', '피해 +0', 'DPT 중반', '등급', 'DPT 힘 충족', 'DPT 후반', '등급', '특징'].map((x) => h('th', {}, x)))),
       wBody)),
-    h('p', { class: 'small', style: 'margin-top:calc(3*var(--u))' }, '읽는 법: 중반(힘 14)에는 힘 요구치가 낮은 3티어가 앞서고, 후반(+6, 힘 18)에는 5티어와 철퇴가 앞섭니다. 결투자 무기 능력, 인챈트, 특성, 기습, 막기는 DPT에 넣지 않았습니다(특징 칸 참고).'),
+    h('p', { class: 'small', style: 'margin-top:calc(3*var(--u))' }, '마법사의 지팡이는 마법사 전용이고 융합한 막대에 따라 성능이 달라져 순위에서 뺐습니다(31종). 읽는 법: 중반(힘 14)에는 힘 요구치가 낮은 3티어가 앞서고, 후반(+6, 힘 18)에는 5티어와 철퇴가 앞섭니다. 결투자 무기 능력, 인챈트, 특성, 기습, 막기는 DPT에 넣지 않았습니다(특징 칸 참고).'),
   );
   renderWeapons();
 
@@ -233,6 +233,12 @@
 
   /* ---------------- method ---------------- */
   const PB = HERO.pointBudget;
+  // Korean restatement of gear.json scenarios[].choice
+  const SCEN_NOTE = {
+    A: '힘 14 = 시작 10 + 12층까지 끝낸 두 구간(5층마다)의 보장 힘 물약 4개. 4~5티어 무기는 힘이 모자라 페널티를 받습니다.',
+    A_atReq: '힘을 각 무기의 요구치에 딱 맞춘 비교용 조건입니다.',
+    B: '힘 18 = 시작 10 + 20층까지 보장되는 힘 물약 8개. 무기는 +6으로 가정했습니다.',
+  };
   section('method', '기준 · 한계', rectSprite('items', WEAPON.Sword.sprite),
     h('h3', {}, '특성 포인트'),
     h('ul', { class: 'small' },
@@ -241,7 +247,7 @@
       h('li', {}, '신성한 영감의 물약으로 한 티어에 +2, 티어당 1회 더 받을 수 있습니다.'),
       h('li', {}, srcLink(PB.tierLevelThresholdsSrc))),
     h('h3', {}, 'DPT 시나리오'),
-    h('ul', { class: 'small' }, ...scen.map((s) => h('li', {}, `${s.label_ko} — 영웅 명중 ${s.attackSkill}. ${s.choice || ''}`))),
+    h('ul', { class: 'small' }, ...scen.map((s) => h('li', {}, `${s.label_ko} — 영웅 명중 ${s.attackSkill}. ${SCEN_NOTE[s.id] || ''}`))),
     h('ul', { class: 'small' },
       ...Object.entries(GEAR.scenarios.mobs).map(([, m]) => h('li', {}, `${m.name.text}(${m.depth}층): 회피 ${m.defenseSkill}, DR 0–${m.drMax} `, srcLink(m.defenseSrc)))),
     h('h3', {}, '계산에서 뺀 것'),
