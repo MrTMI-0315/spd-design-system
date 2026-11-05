@@ -1,0 +1,309 @@
+{
+  "class": "HUNTRESS",
+  "summary": "영혼의 활은 강화할 수 없고 영웅 레벨에 따라 강해지므로, 강화 주문서는 갑옷·투척 무기·반지에 나눠 씁니다. 활은 저격의 반지로 키우고 근접 무기는 +0 보조로만 씁니다.",
+  "summaryTag": "추정",
+  "subclassVerdict": {
+    "pick": "SNIPER",
+    "why": "v4.0에서 숲지기 핵심인 나무껍질이 레벨의 50%→33%로 줄고 헤쳐진 풀에서 안 터짐. 저격수는 변경 없음",
+    "tag": "추정"
+  },
+  "builds": [
+    {
+      "subclass": "SNIPER",
+      "title": "강화 투척 무기 저격수",
+      "concept": "투척 무기 한 묶음에 강화를 몰아 표식 지속과 특수 사격 피해를 최대치로 올립니다. 활은 공격력 증강으로 원거리 저격탄을 노립니다.",
+      "talents": [
+        {
+          "id": "FOLLOWUP_STRIKE",
+          "points": 2,
+          "why": "활로 견제한 뒤 붙은 적에게 근접 추가 피해. 초반 화력 보강",
+          "tag": "설명문 기준",
+          "quote": "+2: 그 적에게 가하는 다음 근접 공격은 3의 추가 피해"
+        },
+        {
+          "id": "NATURES_BOUNTY",
+          "points": 2,
+          "why": "열매로 식량 부담을 덜고 씨앗도 확보",
+          "tag": "설명문 기준",
+          "quote": "+2: 길게 자란 풀에서 6개의 열매를 찾아낼 수 있습니다"
+        },
+        {
+          "id": "SURVIVALISTS_INTUITION",
+          "points": 1,
+          "why": "강화를 몰아줄 투척 무기의 저주·강화 수치를 빨리 확인",
+          "tag": "설명문 기준",
+          "quote": "+1: 투척 무기를 3배 빠르게 감정합니다"
+        },
+        {
+          "id": "DURABLE_PROJECTILES",
+          "points": 2,
+          "why": "강화를 몰아준 투척 무기 묶음을 오래 유지",
+          "tag": "설명문 기준",
+          "quote": "+2: 투척 무기의 내구도가 75% 증가"
+        },
+        {
+          "id": "INVIGORATING_MEAL",
+          "points": 2,
+          "why": "식사 1턴에 신속 2턴. 열매와 겹쳐 이동 손실이 거의 없음",
+          "tag": "설명문 기준",
+          "quote": "+2: 식사에 1턴만 소모되며, 식사 시 2턴의 신속 효과"
+        },
+        {
+          "id": "HEIGHTENED_SENSES",
+          "points": 2,
+          "why": "벽 너머 적 위치를 보고 저격 각을 먼저 잡음",
+          "tag": "설명문 기준",
+          "quote": "+2: 주변 3 타일에 있는 모든 캐릭터에 대해 심안 효과"
+        },
+        {
+          "id": "SHARED_UPGRADES",
+          "points": 3,
+          "why": "투척 무기 +6이면 표식 +6턴, 특수 사격 피해 +100%. +6 미만이면 효과도 그만큼 줄어듦",
+          "tag": "코드 계산",
+          "quote": "core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/Hero.java:1565 levelBonus = min(2*포인트, 무기 강화 수치); bonusDmg = levelBonus/6"
+        },
+        {
+          "id": "SHARED_ENCHANTMENT",
+          "points": 3,
+          "why": "투척 무기에도 활의 마법이 항상 발동",
+          "tag": "설명문 기준",
+          "quote": "+3: 투척 무기를 던질 때 100% 확률로 활의 마법이 적용됩니다"
+        },
+        {
+          "id": "POINT_BLANK",
+          "points": 2,
+          "why": "붙은 적에게 던질 때 명중 감소(-50%)를 없앰. 표식 걸기가 안정적",
+          "tag": "설명문 기준",
+          "quote": "+2: 근거리 명중률 보정이 기존 -50%에서 0%로 변경"
+        },
+        {
+          "id": "SPIRIT_BLADES",
+          "points": 4,
+          "why": "유령 칼날에도 활의 마법이 항상 발동하고 효과 +10%",
+          "tag": "설명문 기준",
+          "quote": "+4: 100% 확률로 영혼의 활의 마법이 적용됩니다. 또한 각 마법의 효과를 10% 증가"
+        },
+        {
+          "id": "FAN_OF_BLADES",
+          "points": 3,
+          "why": "다수전 대응. 90도 안의 적 3명에게 추가 적중",
+          "tag": "설명문 기준",
+          "quote": "+3: 최대 3명의 추가 대상에게 50% 피해로 적중합니다. 90도의 부채꼴"
+        },
+        {
+          "id": "HEROIC_ENERGY",
+          "points": 3,
+          "why": "충전 25짜리 능력이라 감소분이 곧 사용 횟수",
+          "tag": "설명문 기준",
+          "quote": "+3: 방어구 능력 사용에 드는 충전량이 32% 감소"
+        }
+      ],
+      "bonus": [
+        {
+          "tier": 3,
+          "id": "FARSIGHT",
+          "points": 2,
+          "why": "시야가 넓을수록 저격탄 거리 배율(최대 3배)을 더 받음",
+          "tag": "코드 계산",
+          "quote": "core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/SpiritBow.java:236 multiplier = min(3, 1.2*1.125^거리)"
+        }
+      ],
+      "armorAbility": {
+        "id": "SPECTRALBLADES",
+        "why": "충전 25로 가장 싸고, 활 마법을 칼날에 실어 다수전 보완",
+        "tag": "설명문 기준",
+        "quote": "충전 소모량: 25"
+      },
+      "gear": [
+        {
+          "slot": "weapon",
+          "ref": "Sword",
+          "why": "강화 없이 쓸 보조 무기. A(+0, 힘14) DPT 4.56으로 1위, 요구 힘 14",
+          "tag": "코드 계산",
+          "quote": "scenarios A: Sword dpt 4.56, strReq 14"
+        },
+        {
+          "slot": "enchantment",
+          "ref": "Blazing",
+          "why": "활에 부여. 마법부여 공유·영혼의 칼날로 투척 무기와 칼날에도 발동",
+          "tag": "설명문 기준",
+          "quote": "이 마법은 무기에서 화염을 내뿜어 적을 불태우고, 이미 불타는 적에게 추가 피해"
+        },
+        {
+          "slot": "glyph",
+          "ref": "Repulsion",
+          "why": "붙은 적을 밀어내 저격 거리를 다시 확보",
+          "tag": "설명문 기준",
+          "quote": "이 상형문자는 공격자를 튕겨내며, 뒤로 날려 보냅니다."
+        },
+        {
+          "slot": "ring",
+          "name": "저격의 반지",
+          "why": "강화 불가인 영혼의 활 피해를 올리는 수단. 투척 무기 피해·내구도도 증가",
+          "tag": "코드 계산",
+          "quote": "core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/SpiritBow.java:191 min += 반지 보너스, :199 max += 2*반지 보너스"
+        },
+        {
+          "slot": "other",
+          "name": "투척 무기 한 묶음(예: 투척용 망치)",
+          "why": "강화 공유는 이 묶음의 강화 수치만 봄. 여러 종류에 나누지 말 것",
+          "tag": "추정"
+        }
+      ],
+      "playstyle": "초반엔 활로 견제하다 붙은 적은 추가 타격 보너스를 받은 근접 공격으로 마무리합니다. 텐구 이후 투척 무기 한 묶음에 강화를 몰아주고, 표식을 건 뒤 공격력 증강 활로 멀리서 저격탄을 쏩니다. 후반엔 유령 칼날로 다수전을 정리합니다.",
+      "playstyleTag": "추정"
+    },
+    {
+      "subclass": "WARDEN",
+      "title": "풀숲 숲지기",
+      "concept": "물약과 씨앗으로 긴 풀을 계속 만들어 나무껍질 방어력을 유지하고, 추출물 다트와 자연의 힘으로 싸웁니다.",
+      "talents": [
+        {
+          "id": "NATURES_BOUNTY",
+          "points": 2,
+          "why": "열매에서 씨앗이 나와 숲지기의 다트·식물 재료가 됨",
+          "tag": "설명문 기준",
+          "quote": "+2: 6개의 열매 ... 열매는 ... 씨앗을 얻을 수 있습니다"
+        },
+        {
+          "id": "NATURES_AID",
+          "points": 2,
+          "why": "식물을 자주 밟는 숲지기라 나무껍질이 자주 발동",
+          "tag": "설명문 기준",
+          "quote": "+2: 시야 내에서 식물이 발동할 때 5턴 마다 감소하며 0-2의 방어력을 제공하는 나무껍질 효과를 2 얻습니다"
+        },
+        {
+          "id": "FOLLOWUP_STRIKE",
+          "points": 1,
+          "why": "다트 명중 후 근접 마무리 보조",
+          "tag": "설명문 기준",
+          "quote": "+1: 다음 근접 공격은 2의 추가 피해"
+        },
+        {
+          "id": "LIQUID_NATURE",
+          "points": 2,
+          "why": "물약마다 긴 풀 최대 6칸과 2턴 속박. 긴 풀은 나무껍질 발동 조건",
+          "tag": "코드 계산",
+          "quote": "core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/Talent.java:748 Level.set(grassCell, Terrain.HIGH_GRASS); levels/features/HighGrass.java:72 Barkskin"
+        },
+        {
+          "id": "INVIGORATING_MEAL",
+          "points": 2,
+          "why": "열매를 즉시 먹고 신속 2턴",
+          "tag": "설명문 기준",
+          "quote": "+2: 식사에 1턴(열매는 즉시 먹을 수 있습니다)만 소모되며, 식사 시 2턴의 신속 효과"
+        },
+        {
+          "id": "HEIGHTENED_SENSES",
+          "points": 2,
+          "why": "풀숲 너머 적을 미리 보고 싸울 칸을 고름",
+          "tag": "설명문 기준",
+          "quote": "+2: 주변 3 타일에 있는 모든 캐릭터에 대해 심안 효과"
+        },
+        {
+          "id": "BARKSKIN",
+          "points": 3,
+          "why": "v4.0에서 레벨의 33%로 줄었지만 +3이면 0~레벨 방어력. 헤쳐진 풀은 제외",
+          "tag": "설명문 기준",
+          "quote": "+3: 헤쳐나가지 않은 수풀 또는 식물에 올라설 때 ... 0-현재 레벨의 100%의 방어력"
+        },
+        {
+          "id": "DURABLE_TIPS",
+          "points": 3,
+          "why": "추출물 다트 4배 내구. 씨앗 하나로 오래 씀",
+          "tag": "설명문 기준",
+          "quote": "+3: 추출물을 묻힌 다트가 4 배의 내구도를 가집니다"
+        },
+        {
+          "id": "SHIELDING_DEW",
+          "points": 2,
+          "why": "만피일 때 이슬을 방어막(최대 체력 40%)으로 저장",
+          "tag": "설명문 기준",
+          "quote": "+2: 초과한 회복량만큼의 방어막을 최대 체력의 40%까지 얻습니다"
+        },
+        {
+          "id": "GROWING_POWER",
+          "points": 4,
+          "why": "자연의 힘 중 공격 속도 +50%, 이동 속도 +200%",
+          "tag": "설명문 기준",
+          "quote": "+4: 공격 속도와 이동 속도가 기존 33%/100%에서 50%/200%로 증가"
+        },
+        {
+          "id": "WILD_MOMENTUM",
+          "points": 3,
+          "why": "처치마다 지속 +3턴(최대 +6). 기본 8턴을 늘림",
+          "tag": "설명문 기준",
+          "quote": "+3: 적을 처치하면 자연의 힘의 지속 시간이 3턴 만큼 연장됩니다. 최대 6턴"
+        },
+        {
+          "id": "HEROIC_ENERGY",
+          "points": 3,
+          "why": "충전 35짜리 능력의 사용 빈도를 올림",
+          "tag": "설명문 기준",
+          "quote": "+3: 방어구 능력 사용에 드는 충전량이 32% 감소"
+        }
+      ],
+      "bonus": [
+        {
+          "tier": 3,
+          "id": "POINT_BLANK",
+          "points": 2,
+          "why": "붙은 적에게 다트를 던질 때 명중 감소 제거",
+          "tag": "설명문 기준",
+          "quote": "+2: 근거리 명중률 보정이 기존 -50%에서 0%로 변경"
+        }
+      ],
+      "armorAbility": {
+        "id": "NATURESPOWER",
+        "why": "숲지기 특성은 방어 위주라 화력은 활 속도 버프로 보충",
+        "tag": "설명문 기준",
+        "quote": "두 배의 속도로 이동하며 활을 33% 더 빠르게 발사할 수 있습니다"
+      },
+      "gear": [
+        {
+          "slot": "weapon",
+          "ref": "Sword",
+          "why": "강화는 갑옷 우선이라 +0 근접 무기. A DPT 4.56으로 1위",
+          "tag": "코드 계산",
+          "quote": "scenarios A: Sword dpt 4.56, strReq 14"
+        },
+        {
+          "slot": "enchantment",
+          "ref": "Blooming",
+          "why": "활에 부여. 맞은 자리에 풀이 자라 시야·풀숲 확보. v4.0.1에 풀 생성량 상향",
+          "tag": "설명문 기준",
+          "quote": "Blooming base avg grass created up to 1.5 from 1 (v4.0.1)"
+        },
+        {
+          "slot": "glyph",
+          "ref": "Camouflage",
+          "why": "긴 풀을 계속 만드는 운영이라 투명화 발동 기회가 많음",
+          "tag": "설명문 기준",
+          "quote": "이 상형문자는 착용자를 기다란 풀에 숨어들어, 일시적으로 투명화시킬 수 있습니다."
+        },
+        {
+          "slot": "ring",
+          "name": "저격의 반지",
+          "why": "영혼의 활과 다트 피해를 함께 올림",
+          "tag": "설명문 기준",
+          "quote": "당신의 투척 무기들을 %1$d 만큼 강화한 것 처럼 피해량을 증가시키며, 또한 내구성을 %2$s%% 만큼 늘립니다."
+        },
+        {
+          "slot": "artifact",
+          "name": "자연의 신발",
+          "why": "v4.0에서 강화당 충전 속도 상향(+10에서 +50%)",
+          "tag": "설명문 기준",
+          "quote": "Footwear of Nature charge speed scaling with level increased, up to +50% at +10"
+        },
+        {
+          "slot": "other",
+          "name": "추출물을 묻힌 다트",
+          "why": "튼튼한 화살촉과 함께 씨앗 효과를 원거리로 반복 사용",
+          "tag": "추정"
+        }
+      ],
+      "playstyle": "초반엔 열매와 씨앗을 모으고 물약을 마실 때마다 긴 풀을 깔아 둡니다. 텐구 이후엔 풀숲 위에서 나무껍질을 유지한 채 추출물 다트와 활로 싸웁니다. 후반엔 자연의 힘을 켜고 연속 처치로 지속 시간을 늘립니다.",
+      "playstyleTag": "추정"
+    }
+  ]
+}

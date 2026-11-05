@@ -1,0 +1,312 @@
+{
+  "class": "CLERIC",
+  "summary": "성서 충전이 모든 행동의 비용이므로 식사·반지로 충전을 늘리는 것이 기본입니다. 성서는 충전을 쓸수록 레벨이 올라 최대 충전이 늘어납니다.",
+  "summaryTag": "추정",
+  "subclassVerdict": {
+    "pick": "PALADIN",
+    "why": "천벌이 무기 마법 위력을 +300% 올려 타락이 +0에서도 처치 시 확정. v4.0 타락·음침 변경도 천벌 연계를 명시",
+    "tag": "코드 계산",
+    "quote": "core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/Weapon.java:561 SmiteTracker → multi += 3f; items/weapon/enchantments/Corrupting.java:47 (lvl+5)/(lvl+20)*multi; v4.0: Corrupting can now apply if ANY part of the corrupting hit kills (e.g. smite)"
+  },
+  "builds": [
+    {
+      "subclass": "PRIEST",
+      "title": "성창 승천 사제",
+      "concept": "충전 4짜리 성창을 주력 딜로 두고, 발광·태양 광선으로 견제합니다. 승천자의 형상에서는 주문 수만큼 강해지는 심판으로 다수전을 정리합니다.",
+      "talents": [
+        {
+          "id": "SEARING_LIGHT",
+          "points": 2,
+          "why": "사제는 50턴마다 인도하는 빛이 공짜라 발광 대상에 +5 물리 피해가 자주 발동",
+          "tag": "설명문 기준",
+          "quote": "+2 인도하는 빛에 발광한 적에게 가하는 물리 공격이 5의 추가 피해를 줍니다"
+        },
+        {
+          "id": "SHIELD_OF_LIGHT",
+          "points": 2,
+          "why": "충전 1, 즉시 시전으로 강적의 공격을 3-6 방어",
+          "tag": "설명문 기준",
+          "quote": "+2: 즉시 시전되며 5턴 동안 대상의 공격에 대해 3-6 방어력을 얻습니다. 충전 소모 : 1"
+        },
+        {
+          "id": "HOLY_INTUITION",
+          "points": 1,
+          "why": "저주 확인용 주문. 반지·막대를 안심하고 착용",
+          "tag": "설명문 기준",
+          "quote": "+1: 신성한 직감은 대상 아이템의 저주 여부를 판단합니다. 충전 소모 : 3"
+        },
+        {
+          "id": "SUNRAY",
+          "points": 2,
+          "why": "충전 1에 6-12 피해와 6턴 실명. 실명 중 재적중 시 마비",
+          "tag": "설명문 기준",
+          "quote": "+2: 6-12 피해를 주며, 6턴 동안 실명시킵니다. 충전 소모 : 1 ... 이미 실명한 대상이 태양 광선에 적중하면 마비"
+        },
+        {
+          "id": "BLESS",
+          "points": 2,
+          "why": "충전 1로 방어막 15와 축복 10턴",
+          "tag": "설명문 기준",
+          "quote": "+2: 자신에게 10턴의 축복과 15의 방어막 ... 충전 소모 : 1"
+        },
+        {
+          "id": "ENLIGHTENING_MEAL",
+          "points": 2,
+          "why": "식사마다 성서 충전 1. 성창 4충전 마련을 앞당김",
+          "tag": "설명문 기준",
+          "quote": "+2: 식사에 1턴만 소모되며, 식사 시 성서의 충전량이 1 회복됩니다"
+        },
+        {
+          "id": "HOLY_LANCE",
+          "points": 3,
+          "why": "충전 4로 60-110 피해. 언데드·악마에겐 최대 피해. 쿨다운 30턴",
+          "tag": "설명문 기준",
+          "quote": "+3: 성창은 강력한 원거리 주문으로 60-110의 피해를 줍니다. 충전 소모 : 4 ... 30턴의 쿨다운"
+        },
+        {
+          "id": "HALLOWED_GROUND",
+          "points": 3,
+          "why": "7x7 범위에 적 속박·불구, 사제는 방어막. 충전 2",
+          "tag": "설명문 기준",
+          "quote": "+3: 20턴 동안 7x7 크기의 땅을 축성합니다. 충전 소모 : 2"
+        },
+        {
+          "id": "CLEANSE",
+          "points": 2,
+          "why": "충전 2로 디버프 면역 3턴과 방어막 20",
+          "tag": "설명문 기준",
+          "quote": "+2: 3턴의 디버프 면역효과와 20의 방어막을 부여합니다. 충전 소모 : 2"
+        },
+        {
+          "id": "JUDGEMENT",
+          "points": 4,
+          "why": "시야 내 모든 적 25-50, 이전 주문마다 +33%. 형상 중 주문을 몰아 쓰면 커짐",
+          "tag": "설명문 기준",
+          "quote": "+4: 시야 내 모든 적에게 25-50의 피해 ... 시전한 주문마다 +33% 피해를 추가로"
+        },
+        {
+          "id": "DIVINE_INTERVENTION",
+          "points": 3,
+          "why": "위기 때 최대 250 방어막과 형상 5턴 연장. 충전 5, 형상당 1회",
+          "tag": "설명문 기준",
+          "quote": "+3: 최대 250의 방어막을 부여하고 승천자의 형상 지속시간을 5턴 늘립니다"
+        },
+        {
+          "id": "HEROIC_ENERGY",
+          "points": 3,
+          "why": "충전 50으로 비싼 승천자의 형상 비용을 32% 줄임",
+          "tag": "설명문 기준",
+          "quote": "+3: 방어구 능력 사용에 드는 충전량이 32% 감소"
+        }
+      ],
+      "bonus": [
+        {
+          "tier": 3,
+          "id": "MNEMONIC_PRAYER",
+          "points": 2,
+          "why": "턴 소모 없이 충전 1로 실명·축복 등을 4턴 연장",
+          "tag": "설명문 기준",
+          "quote": "+2: 버프/디버프의 지속시간을 4턴 연장합니다. 충전 소모 : 1 ... 시전에 턴을 소모하지 않습니다"
+        }
+      ],
+      "armorAbility": {
+        "id": "ASCENDEDFORM",
+        "why": "주문 시전마다 충전당 방어막 10. 주문을 많이 쓰는 사제와 맞음",
+        "tag": "설명문 기준",
+        "quote": "주문을 시전하면 사용한 성서의 충전량당 10의 방어막을 얻습니다"
+      },
+      "gear": [
+        {
+          "slot": "weapon",
+          "ref": "Mace",
+          "why": "딜은 주문 담당이라 힘 14로 드는 3티어. A 명중률 0.69로 3티어 중 최고, DPT 3.83",
+          "tag": "코드 계산",
+          "quote": "scenarios A: Mace pHit 0.6875, dpt 3.826, strReq 14"
+        },
+        {
+          "slot": "glyph",
+          "ref": "Potential",
+          "why": "맞을 때 마법 막대를 충전. 막대로 발광을 소모하는 사제와 맞음",
+          "tag": "설명문 기준",
+          "quote": "이 상형문자는 공격받을 때 전기 에너지를 충전하며, 발동할 때 착용자의 마법 막대에 충전량을 제공합니다."
+        },
+        {
+          "slot": "ring",
+          "name": "충전의 반지",
+          "why": "성서 충전 속도가 이 반지 배율로 나뉨. 주문 횟수를 직접 늘림",
+          "tag": "코드 계산",
+          "quote": "core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/artifacts/HolyTome.java:294 turnsToCharge /= RingOfEnergy.artifactChargeMultiplier(target)"
+        },
+        {
+          "slot": "wand",
+          "name": "공격형 마법 막대(예: 마탄의 마법 막대)",
+          "why": "막대로 발광을 소모하면 사제 레벨만큼 추가 마법 피해",
+          "tag": "설명문 기준",
+          "quote": "발광이 광휘, 다른 아군 및 마법 막대와 적을 지정하는 몇몇 유물로 소모가 가능하며, ... 사제의 레벨과 동일한 추가 마법 피해를 줍니다"
+        },
+        {
+          "slot": "artifact",
+          "name": "성서",
+          "why": "충전을 쓸수록 레벨업, 최대 충전은 레벨+3(최대 10). 아끼지 말고 쓸 것",
+          "tag": "코드 계산",
+          "quote": "core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/artifacts/HolyTome.java:59 chargeCap = Math.min(level()+3, 10); :173 exp로 레벨업"
+        }
+      ],
+      "playstyle": "초반엔 곤봉과 인도하는 빛, 태양 광선으로 안전하게 싸우고 식사로 충전을 채웁니다. 사제가 되면 강적에게는 성창, 무리에게는 축성의 땅을 쓰고, 공짜 인도하는 빛의 발광은 마법 막대로 터뜨립니다. 후반엔 승천자의 형상 중 주문을 몰아 쓴 뒤 심판으로 마무리합니다.",
+      "playstyleTag": "추정"
+    },
+    {
+      "subclass": "PALADIN",
+      "title": "천벌 타락 성기사",
+      "concept": "천벌의 마법 위력 +300%로 타락 마법을 처치 시 확정 발동시켜 적을 아군으로 만들고, 집단의 힘·보호의 오라·안수기도로 그 아군과 함께 싸웁니다.",
+      "talents": [
+        {
+          "id": "SEARING_LIGHT",
+          "points": 2,
+          "why": "인도하는 빛 뒤 근접 공격에 +5. 근접 위주 성기사의 초반 화력",
+          "tag": "설명문 기준",
+          "quote": "+2 인도하는 빛에 발광한 적에게 가하는 물리 공격이 5의 추가 피해를 줍니다"
+        },
+        {
+          "id": "SHIELD_OF_LIGHT",
+          "points": 2,
+          "why": "충전 1, 즉시 시전으로 강적의 공격을 3-6 방어",
+          "tag": "설명문 기준",
+          "quote": "+2: 즉시 시전되며 5턴 동안 대상의 공격에 대해 3-6 방어력을 얻습니다. 충전 소모 : 1"
+        },
+        {
+          "id": "SATIATED_SPELLS",
+          "points": 1,
+          "why": "식사 후 첫 주문에 방어막 3. 남는 1점",
+          "tag": "설명문 기준",
+          "quote": "+1: 식사 후 다음 주문 시전 시 3의 방어막을 얻습니다"
+        },
+        {
+          "id": "SUNRAY",
+          "points": 2,
+          "why": "충전 1의 원거리 견제와 실명. 근접 전에 적 공격을 막음",
+          "tag": "설명문 기준",
+          "quote": "+2: 6-12 피해를 주며, 6턴 동안 실명시킵니다. 충전 소모 : 1"
+        },
+        {
+          "id": "BLESS",
+          "points": 2,
+          "why": "충전 1로 방어막 15. 성기사는 주문마다 신성한 무기·보호구 지속이 늘어남",
+          "tag": "설명문 기준",
+          "quote": "+2: 자신에게 10턴의 축복과 15의 방어막 ... 충전 소모 : 1"
+        },
+        {
+          "id": "ENLIGHTENING_MEAL",
+          "points": 2,
+          "why": "식사마다 성서 충전 1. 천벌(충전 2) 횟수를 늘림",
+          "tag": "설명문 기준",
+          "quote": "+2: 식사에 1턴만 소모되며, 식사 시 성서의 충전량이 1 회복됩니다"
+        },
+        {
+          "id": "LAY_ON_HANDS",
+          "points": 3,
+          "why": "충전 1로 방어막 25, 또는 인접 아군 25 회복. 연속 시전 가능",
+          "tag": "설명문 기준",
+          "quote": "+3: 인접한 캐릭터를 25만큼 치유하거나, 성기사에게 25의 방어막을 부여합니다. 충전 소모 : 1"
+        },
+        {
+          "id": "AURA_OF_PROTECTION",
+          "points": 3,
+          "why": "2타일 안 아군 포함 받는 피해 -40%, 상형문자 발동 배율 2배",
+          "tag": "코드 계산",
+          "quote": "core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/armor/Armor.java:827 multi += 0.25f + 0.25f*3 → 2.0"
+        },
+        {
+          "id": "CLEANSE",
+          "points": 2,
+          "why": "충전 2로 자신과 아군 디버프 해제, 면역 3턴, 방어막 20",
+          "tag": "설명문 기준",
+          "quote": "+2: 성직자와 근처 아군에게 3턴의 디버프 면역효과와 20의 방어막을 부여합니다. 충전 소모 : 2"
+        },
+        {
+          "id": "LIFE_LINK",
+          "points": 4,
+          "why": "강화 아군과 피해를 나누고 피해 감소를 -50%로",
+          "tag": "설명문 기준",
+          "quote": "+4: 생명 연결이 20턴 동안 지속되며, 집단의 힘 피해 감소가 -50%로 증가합니다"
+        },
+        {
+          "id": "BEAMING_RAY",
+          "points": 3,
+          "why": "타락시킨 아군을 12타일 안 적에게 보내고 추가 피해 +45%",
+          "tag": "설명문 기준",
+          "quote": "+3: 재배치 광선의 최대 사거리는12타일이며, 10턴 동안 가장 가까운 적에게 집단의 힘 추가 피해가 +45%로 증가합니다"
+        },
+        {
+          "id": "HEROIC_ENERGY",
+          "points": 3,
+          "why": "충전 35인 집단의 힘을 더 자주 갱신",
+          "tag": "설명문 기준",
+          "quote": "+3: 방어구 능력 사용에 드는 충전량이 32% 감소"
+        }
+      ],
+      "bonus": [
+        {
+          "tier": 3,
+          "id": "WALL_OF_LIGHT",
+          "points": 2,
+          "why": "통로를 5칸 벽으로 막아 다수전을 나눔",
+          "tag": "설명문 기준",
+          "quote": "+2: 20턴 동안 지속되는 5타일 길이의 벽을 설치하여 적들을 밀쳐내고 가로막습니다. 충전 소모 : 3"
+        }
+      ],
+      "armorAbility": {
+        "id": "POWEROFMANY",
+        "why": "타락시킨 적이나 소환한 아군을 강화. 오라·안수기도가 아군에도 적용됨",
+        "tag": "설명문 기준",
+        "quote": "100턴 동안 아군을 강화하거나, 새로운 강화된 아군을 소환합니다 ... +25% 추가 피해를 입히고, 받는 피해가 -25% 감소"
+      },
+      "gear": [
+        {
+          "slot": "weapon",
+          "ref": "Sword",
+          "why": "중반 무기. A(+0, 힘 14) DPT 4.56으로 1위",
+          "tag": "코드 계산",
+          "quote": "scenarios A: Sword dpt 4.56, strReq 14"
+        },
+        {
+          "slot": "weapon",
+          "ref": "Greataxe",
+          "why": "후반 B DPT 30.70 1위. +6에도 요구 힘 17이라 부족하면 철퇴(30.10, 요구 13)",
+          "tag": "코드 계산",
+          "quote": "scenarios B: Greataxe dpt 30.70 req 17; Flail dpt 30.10 req 13; A: Greataxe dpt 0.47 (req 20)"
+        },
+        {
+          "slot": "enchantment",
+          "ref": "Corrupting",
+          "why": "천벌로 처치하면 +0에서도 발동률 0.25×4=100%. 처치한 적이 아군이 됨",
+          "tag": "코드 계산",
+          "quote": "core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/weapon/enchantments/Corrupting.java:47 (0+5)/(0+20) * (1+3) = 1.0; actors/hero/spells/Smite.java:88 SmiteTracker를 공격(:105) 전에 부여"
+        },
+        {
+          "slot": "enchantment",
+          "ref": "Blazing",
+          "why": "타락(희귀)이 없을 때 대안. 천벌 중 +0 발동률 1/3×4로 확정 발동",
+          "tag": "코드 계산",
+          "quote": "Blazing (lvl+1)/(lvl+3) * multi: +0 = 0.333 × (1+3) = 1.33; Weapon.java:561 smite multi += 3f"
+        },
+        {
+          "slot": "glyph",
+          "ref": "Thorns",
+          "why": "보호의 오라 +3에서 +6 발동률 0.44→0.89. 발동형 상형문자라 오라 효과를 받음",
+          "tag": "코드 계산",
+          "quote": "Thorns (lvl+2)/(lvl+12): +6 = 0.444; Armor.java:827 aura +3 → ×2.0 = 0.889"
+        },
+        {
+          "slot": "ring",
+          "name": "충전의 반지",
+          "why": "성서 충전 속도 증가. 천벌·안수기도 횟수를 직접 늘림",
+          "tag": "코드 계산",
+          "quote": "core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/artifacts/HolyTome.java:294 turnsToCharge /= RingOfEnergy.artifactChargeMultiplier(target)"
+        }
+      ],
+      "playstyle": "초반엔 곤봉과 인도하는 빛 연계로 근접전을 하고, 검이 나오면 갈아탑니다. 성기사가 되면 보호의 오라를 켜고 천벌로 마무리해 타락 마법으로 적을 아군으로 만들며, 안수기도로 그 아군을 회복시킵니다. 후반엔 집단의 힘과 생명 연결로 강화한 아군을 앞세웁니다.",
+      "playstyleTag": "추정"
+    }
+  ]
+}

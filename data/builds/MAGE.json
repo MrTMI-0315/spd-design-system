@@ -1,0 +1,316 @@
+{
+  "class": "MAGE",
+  "summary": "마법사의 지팡이에 강화를 몰고 융합한 마법 막대로 싸우는 직업입니다. 근접 무기 DPT가 낮아 막대 충전과 방어막 특성으로 교전 수를 버팁니다.",
+  "summaryTag": "추정",
+  "subclassVerdict": {
+    "pick": "BATTLEMAGE",
+    "why": "흑마법사 표식은 +0 막대 15%라 강화에 크게 의존, 전투 마법사 효과는 매 타격 발동",
+    "tag": "추정"
+  },
+  "builds": [
+    {
+      "subclass": "BATTLEMAGE",
+      "title": "대지 지팡이 전투 마법사",
+      "concept": "지팡이에 대지의 마법 막대를 융합해 발사→근접 순으로 싸웁니다. 근접 타격이 암석 장갑과 충전 0.5를 돌려줘 지팡이 하나로 공방을 해결합니다.",
+      "talents": [
+        {
+          "id": "BACKUP_BARRIER",
+          "points": 2,
+          "why": "마지막 충전을 쓸 때 방어막 5, 근접 전환 직전 보호",
+          "tag": "설명문 기준",
+          "quote": "+2: 지팡이의 마지막 충전량을 사용할 때마다 5 만큼의 방어막"
+        },
+        {
+          "id": "LINGERING_MAGIC",
+          "points": 2,
+          "why": "발사 후 다음 근접 +2, 발사→근접 순서와 맞물림",
+          "tag": "설명문 기준",
+          "quote": "+2: 지팡이나 마법 막대를 발사하면 다음 물리 공격의 피해량이 2 증가"
+        },
+        {
+          "id": "EMPOWERING_MEAL",
+          "points": 1,
+          "why": "식사 후 3발 +2 피해, 남는 1포인트 용도",
+          "tag": "설명문 기준",
+          "quote": "+1: 식사 후 다음 3번의 마법 막대 발사의 피해량이 2만큼 증가"
+        },
+        {
+          "id": "ENERGIZING_MEAL",
+          "points": 2,
+          "why": "식사 1턴, 8턴 충전 효과로 지팡이 회전 증가",
+          "tag": "설명문 기준",
+          "quote": "+2: 식사에 1턴만 소모되며, 식사 시 8턴의 충전 효과"
+        },
+        {
+          "id": "SHIELD_BATTERY",
+          "points": 2,
+          "why": "남은 충전을 충전당 최대 체력 6% 방어막으로 전환하는 비상 수단",
+          "tag": "설명문 기준",
+          "quote": "+2: 충전량당 최대 체력의 6%에 해당하는 방어막"
+        },
+        {
+          "id": "INSCRIBED_POWER",
+          "points": 2,
+          "why": "주문서 사용 후 3발 +2 강화, 강화 주문서는 6발",
+          "tag": "설명문 기준",
+          "quote": "+2: 다음 3번의 마법 막대 발사에 +2의 강화 수치; 강화의 주문서는 발사 수 2배"
+        },
+        {
+          "id": "EMPOWERED_STRIKE",
+          "points": 3,
+          "why": "발사 후 첫 지팡이 근접 +50%, 융합 효과 위력 +150%",
+          "tag": "설명문 기준",
+          "quote": "+3: 지팡이 발사 이후 첫 지팡이 근접 공격 피해량 +50%, 추가 효과 위력 +150%"
+        },
+        {
+          "id": "EXCESS_CHARGE",
+          "points": 3,
+          "why": "완충 상태 첫 사용 시 지팡이 강화×2 방어막, +10이면 20",
+          "tag": "설명문 기준",
+          "quote": "+3: 지팡이 강화 수치의 2배의 방어막"
+        },
+        {
+          "id": "MYSTICAL_CHARGE",
+          "points": 2,
+          "why": "근접 명중마다 유물 충전 1턴, 유물이 있을 때 효율",
+          "tag": "설명문 기준",
+          "quote": "+2: 지팡이 근접 공격이 명중할 때마다 1턴의 유물 충전 효과"
+        },
+        {
+          "id": "ELEMENTAL_POWER",
+          "points": 4,
+          "why": "기본 15-25 범위 피해를 2배로",
+          "tag": "설명문 기준",
+          "quote": "+4: 원소 폭발의 위력이 100% 증가 (기본 최대 15-25)"
+        },
+        {
+          "id": "REACTIVE_BARRIER",
+          "points": 3,
+          "why": "맞힌 대상당 방어막 7.5, 최대 7명이면 52",
+          "tag": "설명문 기준",
+          "quote": "+3: 영향 받은 대상 하나 당 7.5의 방어막, 최대 7명"
+        },
+        {
+          "id": "HEROIC_ENERGY",
+          "points": 3,
+          "why": "원소 폭발 35 충전 → 약 24",
+          "tag": "설명문 기준",
+          "quote": "+3: 방어구 능력 사용에 드는 충전량이 32% 감소"
+        }
+      ],
+      "bonus": [
+        {
+          "tier": 3,
+          "id": "MYSTICAL_CHARGE",
+          "points": 1,
+          "why": "유물 충전 1.5턴",
+          "tag": "설명문 기준",
+          "quote": "+3: 1.5턴의 유물 충전 효과"
+        },
+        {
+          "tier": 3,
+          "id": "DESPERATE_POWER",
+          "points": 1,
+          "why": "마지막 충전 발사 +1 강화, 예비 방어막과 같은 타이밍",
+          "tag": "설명문 기준",
+          "quote": "+1: 현재 충전량이 1일 때 최종 발사에 강화 수치 +1"
+        },
+        {
+          "tier": 4,
+          "id": "BLAST_RADIUS",
+          "points": 2,
+          "why": "범위 4→6칸, 반응형 방어막 대상 수 증가",
+          "tag": "설명문 기준",
+          "quote": "+2: 원소 폭발의 범위가 4타일에서 6타일로 증가"
+        }
+      ],
+      "armorAbility": {
+        "id": "ELEMENTALBLAST",
+        "why": "지팡이 융합 막대에 따라 효과가 바뀌어 지팡이 몰빵과 맞고 방어막까지 얻음",
+        "tag": "추정"
+      },
+      "gear": [
+        {
+          "slot": "weapon",
+          "ref": "MagesStaff",
+          "why": "B DPT 9.10으로 최하위지만 이 수치는 융합 효과·특성 제외(한계 참고)",
+          "tag": "코드 계산",
+          "quote": "scenario B MagesStaff dpt 9.0982; limitations: Enchantments, glyphs, talents ... are ignored"
+        },
+        {
+          "slot": "wand",
+          "name": "대지의 마법 막대 (지팡이 융합)",
+          "why": "근접 피해 일부가 암석 장갑으로 돌아와 근접 운영을 받쳐 줌",
+          "tag": "설명문 기준",
+          "quote": "입힌 피해량의 일부가 암석 장갑으로 전환되어 돌아옵니다 (core/src/main/assets/messages/items/items_ko.properties:1662)"
+        },
+        {
+          "slot": "wand",
+          "name": "마탄의 마법 막대 (대안)",
+          "why": "시작 막대, 근접 시 모든 막대·지팡이 충전",
+          "tag": "설명문 기준",
+          "quote": "마탄의 지팡이로 적을 공격하면, 가지고 있는 모든 마법 막대와 지팡이가 충전 (core/src/main/assets/messages/items/items_ko.properties:1676)"
+        },
+        {
+          "slot": "glyph",
+          "ref": "Potential",
+          "why": "피격 시 막대 충전, +6 발동률 58%",
+          "tag": "코드 계산",
+          "quote": "(level+1)/(level+6): +0 16.7%, +6 58.3%"
+        },
+        {
+          "slot": "ring",
+          "name": "충전의 반지",
+          "why": "지팡이·유물 충전 속도가 곧 근접 강화 횟수",
+          "tag": "추정"
+        }
+      ],
+      "playstyle": "초반엔 마탄 지팡이로 원거리 견제 후 다가오는 적을 지팡이로 칩니다. 텐구 이후 대지의 막대를 융합해 발사→근접 순서로 강력한 일격을 계속 터뜨리고, 과충전 방어막을 위해 교전 전 지팡이를 채워 둡니다. 후반엔 원소 폭발로 무리를 처리하며 반응형 방어막을 얻습니다.",
+      "playstyleTag": "추정"
+    },
+    {
+      "subclass": "WARLOCK",
+      "title": "하수인 흑마법사",
+      "concept": "여러 마법 막대로 영혼 표식을 뿌리고, 망령·타락시킨 아군이 표식을 때려 회복을 대신 챙깁니다. 격렬한 마법이 한 번에 막대를 여러 번 쏴 표식 확률을 높입니다.",
+      "talents": [
+        {
+          "id": "BACKUP_BARRIER",
+          "points": 2,
+          "why": "마지막 충전 사용 시 방어막 5",
+          "tag": "설명문 기준",
+          "quote": "+2: 지팡이의 마지막 충전량을 사용할 때마다 5 만큼의 방어막"
+        },
+        {
+          "id": "LINGERING_MAGIC",
+          "points": 2,
+          "why": "발사 후 근접 +2, 표식 대상 근접 회복량도 늘어남",
+          "tag": "설명문 기준",
+          "quote": "+2: 지팡이나 마법 막대를 발사하면 다음 물리 공격의 피해량이 2 증가"
+        },
+        {
+          "id": "EMPOWERING_MEAL",
+          "points": 1,
+          "why": "식사 후 3발 +2 피해",
+          "tag": "설명문 기준",
+          "quote": "+1: 식사 후 다음 3번의 마법 막대 발사의 피해량이 2만큼 증가"
+        },
+        {
+          "id": "ENERGIZING_MEAL",
+          "points": 2,
+          "why": "식사 시 8턴 충전, 막대 여러 개를 동시에 채움",
+          "tag": "설명문 기준",
+          "quote": "+2: 식사에 1턴만 소모되며, 식사 시 8턴의 충전 효과"
+        },
+        {
+          "id": "SHIELD_BATTERY",
+          "points": 2,
+          "why": "충전당 최대 체력 6% 방어막 비상 수단",
+          "tag": "설명문 기준",
+          "quote": "+2: 충전량당 최대 체력의 6%에 해당하는 방어막"
+        },
+        {
+          "id": "INSCRIBED_POWER",
+          "points": 2,
+          "why": "+2 강화 발사는 표식 확률도 올림",
+          "tag": "코드 계산",
+          "quote": "mark chance = 1-(0.92^(lvl*charges+1)-0.07) (core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/wands/Wand.java:217-219); ScrollEmpower → buffedLvl +2 (core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/wands/Wand.java:401-402)"
+        },
+        {
+          "id": "SOUL_SIPHON",
+          "points": 3,
+          "why": "아군 공격이 표식을 40% 효율로 발동, 하수인 운영의 핵심",
+          "tag": "설명문 기준",
+          "quote": "+3: 다른 캐릭터의 물리 공격이 영혼의 낙인을 40% 효율로 발동"
+        },
+        {
+          "id": "NECROMANCERS_MINIONS",
+          "points": 3,
+          "why": "표식 적 사망 시 40% 확률로 망령 아군",
+          "tag": "설명문 기준",
+          "quote": "+3: 40% 확률로 그 자리에 타락한 망령을 일으킴"
+        },
+        {
+          "id": "ALLY_WARP",
+          "points": 2,
+          "why": "4칸 내 아군과 위치 교환, 망령을 앞세우고 빠질 수 있음",
+          "tag": "설명문 기준",
+          "quote": "+2: 4타일 내의 아군을 선택하여 즉시 위치를 바꿈"
+        },
+        {
+          "id": "FIRE_EVERYTHING",
+          "points": 4,
+          "why": "최대 8발, 막대당 3발까지 → 표식 굴림 횟수 증가",
+          "tag": "설명문 기준",
+          "quote": "+4: 최대 8번까지 발사, 각각의 마법 막대가 100% 확률로 3번까지"
+        },
+        {
+          "id": "CONSERVED_MAGIC",
+          "points": 4,
+          "why": "발사당 충전 0.1, 턴 소모 없음",
+          "tag": "설명문 기준",
+          "quote": "+4: 소모 충전량 0.1, 100% 확률로 턴을 소모하지 않음"
+        },
+        {
+          "id": "WILD_POWER",
+          "points": 2,
+          "why": "발사 막대 +3, 최대 +5로 표식 확률 상승",
+          "tag": "설명문 기준",
+          "quote": "+2: +3만큼, 최대 +5까지 강화"
+        }
+      ],
+      "bonus": [
+        {
+          "tier": 3,
+          "id": "SOUL_EATER",
+          "points": 2,
+          "why": "표식 적 처치 시 20% 식사 효과, 허기 부담 완화",
+          "tag": "설명문 기준",
+          "quote": "+2: 피해 1 당 0.67 턴의 허기 회복, 20% 확률로 음식 섭취 효과"
+        },
+        {
+          "tier": 4,
+          "id": "WILD_POWER",
+          "points": 2,
+          "why": "+4, 최대 +7",
+          "tag": "설명문 기준",
+          "quote": "+4: +4만큼, 최대 +7까지 강화"
+        }
+      ],
+      "armorAbility": {
+        "id": "WILDMAGIC",
+        "why": "한 턴에 여러 막대를 쏴 표식을 한꺼번에 깔고, 지팡이 외 막대를 활용",
+        "tag": "추정"
+      },
+      "gear": [
+        {
+          "slot": "weapon",
+          "ref": "Sword",
+          "why": "표식 회복은 근접 피해 비례, A DPT 4.56로 1위·요구 힘 14",
+          "tag": "코드 계산",
+          "quote": "scenario A Sword dpt 4.5633 req 14"
+        },
+        {
+          "slot": "wand",
+          "name": "타락의 마법 막대",
+          "why": "적을 아군으로 돌려 영혼 흡수 발동 주체를 늘림",
+          "tag": "추정"
+        },
+        {
+          "slot": "wand",
+          "name": "번개의 마법 막대 (지팡이 융합)",
+          "why": "연쇄로 여러 적을 맞혀 표식 대상 확대",
+          "tag": "추정"
+        },
+        {
+          "slot": "glyph",
+          "ref": "Potential",
+          "why": "피격 시 막대 충전, 막대 여러 개를 쓰는 흑마법사와 맞음",
+          "tag": "코드 계산",
+          "quote": "(level+1)/(level+6): +0 16.7%, +6 58.3%"
+        }
+      ],
+      "playstyle": "초반엔 전투 마법사와 같게 지팡이로 견제하되 강화는 지팡이에 몰아 표식 확률을 키웁니다. 흑마법사 이후 표식을 깐 적을 검으로 쳐 회복하고, 망령·타락 아군이 표식을 때리게 해 직접 맞는 횟수를 줄입니다. 후반엔 격렬한 마법으로 턴 소모 없이 여러 막대를 쏴 무리에 표식을 깝니다.",
+      "playstyleTag": "추정"
+    }
+  ]
+}

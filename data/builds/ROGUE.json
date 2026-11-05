@@ -1,0 +1,79 @@
+{
+  "class": "ROGUE",
+  "summary": "그림자의 망토로 투명화해 먼저 치고 빠지는 직업입니다. 투명화 시간을 늘리는 특성과 반지 보너스를 묶어 기습 위주로 운영합니다.",
+  "summaryTag": "추정",
+  "subclassVerdict": {
+    "pick": "ASSASSIN",
+    "why": "9턴 마음가짐 공격이 +50%·3회 중 최고 피해이고, 향상된 치사율 3이면 일반 적은 체력 100% 미만 즉사",
+    "tag": "추정"
+  },
+  "builds": [
+    {
+      "subclass": "ASSASSIN",
+      "title": "망토 순환 암살자",
+      "concept": "망토·주문서·연막탄으로 투명화를 이어 마음가짐 4단계를 쌓고, 점멸 일격으로 적을 지웁니다. 망토를 쓸 때마다 반지 +1도 챙깁니다.",
+      "talents": [
+        { "id": "PROTECTIVE_SHADOWS", "points": 2, "why": "투명화 중 매 턴 방어막 1, 최대 5", "tag": "설명문 기준", "quote": "+2: 투명화 상태가 되면 매 턴마다 1 의 방어막, 최대 5" },
+        { "id": "SUCKER_PUNCH", "points": 2, "why": "첫 기습 +2, 초반 단검 피해 보강", "tag": "설명문 기준", "quote": "+2: 적을 처음 기습할 때 2 만큼의 추가 피해" },
+        { "id": "CACHED_RATIONS", "points": 1, "why": "보급 식량 2개, 하나당 체력 5·망토 충전 1", "tag": "설명문 기준", "quote": "+1: 보급 식량을 최대 2개; 5의 체력을 회복하고 그림자의 망토를 1만큼 충전" },
+        { "id": "MYSTICAL_MEAL", "points": 2, "why": "식사 시 유물 충전 5턴, 망토 재사용 앞당김", "tag": "설명문 기준", "quote": "+2: 식사 시 5 턴의 유물 충전 효과" },
+        { "id": "INSCRIBED_STEALTH", "points": 2, "why": "주문서마다 투명화 5턴, 마음가짐 3단계 직전까지 쌓임", "tag": "설명문 기준", "quote": "+2: 주문서, 주문을 사용한 이후 5턴의 투명화; 강화의 주문서는 2배" },
+        { "id": "SILENT_STEPS", "points": 2, "why": "인접하지 않으면 잠든 적이 깨지 않아 기습 기회 유지", "tag": "설명문 기준", "quote": "+2: 적에게 근접하지 않는 한 자고 있는 적을 깨우지 않음" },
+        { "id": "ENHANCED_LETHALITY", "points": 3, "why": "4단계 즉사선 50→100%, 보스는 그 1/5인 20%", "tag": "코드 계산", "quote": "KOThresholds[LVL_4][3] = 1.0; boss: KOThreshold/5 (core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Preparation.java:79-84, :102-106)" },
+        { "id": "ASSASSINS_REACH", "points": 3, "why": "점멸 거리 1/2/3/4 → 2/5/7/10칸", "tag": "코드 계산", "quote": "blinkRanges[...][3] = {2,5,7,10} (core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Preparation.java:91-96)" },
+        { "id": "ENHANCED_RINGS", "points": 2, "why": "망토 사용 시 반지 6턴 +1", "tag": "설명문 기준", "quote": "+2: 유물을 사용했을 때, 반지들의 강화 수치가 6 턴 동안 +1" },
+        { "id": "HASTY_RETREAT", "points": 4, "why": "연막탄 후 4턴 투명화·신속, 마음가짐이 바로 다시 쌓임", "tag": "설명문 기준", "quote": "+4: 점멸한 후 4턴 동안 신속과 투명화 효과" },
+        { "id": "BODY_REPLACEMENT", "points": 3, "why": "체력 60 미끼가 시선을 끄는 동안 마음가짐 준비", "tag": "설명문 기준", "quote": "+3: 60의 체력과 3-9의 방어력을 가진 통나무 미끼" },
+        { "id": "HEROIC_ENERGY", "points": 3, "why": "연막탄 50 충전 → 34", "tag": "설명문 기준", "quote": "+3: 방어구 능력 사용에 드는 충전량이 32% 감소" }
+      ],
+      "bonus": [
+        { "tier": 3, "id": "BOUNTY_HUNTER", "points": 2, "why": "4단계 처치 시 드롭 확률 +32%", "tag": "설명문 기준", "quote": "+2: 단계에 따라 4/8/16/32% 증가" },
+        { "tier": 4, "id": "SHADOW_STEP", "points": 2, "why": "투명 중 연막탄 즉시·30% 절약(다른 특성 미발동)", "tag": "설명문 기준", "quote": "+2: 투명화 상태에서 즉시 발동, 30% 적은 충전량, 다른 특성을 발동시키지 않음" }
+      ],
+      "armorAbility": { "id": "SMOKEBOMB", "why": "빠른 후퇴의 투명화가 곧 마음가짐 시간이라 기습 순환이 끊기지 않음", "tag": "추정" },
+      "gear": [
+        { "slot": "weapon", "ref": "Sword", "why": "A(힘 14) DPT 4.56로 1위. 기습 보정 무기도 DPT엔 기습 미반영", "tag": "코드 계산", "quote": "scenario A Sword dpt 4.5633; limitations: surprise attacks ignored" },
+        { "slot": "weapon", "ref": "Greataxe", "why": "B DPT 30.70 1위, +6 요구 힘 17. 2위 철퇴는 기습 불가라 제외", "tag": "코드 계산", "quote": "scenario B Greataxe 30.7016, Flail 30.1 (철퇴: 기습 공격을 할 수 없습니다)" },
+        { "slot": "armor", "ref": "LeatherArmor", "why": "근접 후 노출 시간 대비 방어, 요구 힘 12로 부담 적음", "tag": "추정" },
+        { "slot": "glyph", "ref": "Camouflage", "why": "풀에서 투명화 → 망토 없이도 마음가짐을 쌓을 기회", "tag": "설명문 기준", "quote": "기다란 풀에 숨어들어, 일시적으로 투명화" },
+        { "slot": "artifact", "name": "그림자의 망토", "why": "시작 유물, 투명화·향상된 반지·신비한 식사의 중심", "tag": "추정" },
+        { "slot": "ring", "name": "회피의 반지", "why": "일격 후 노출된 동안 생존, 향상된 반지로 +1 추가", "tag": "추정" }
+      ],
+      "playstyle": "초반엔 망토로 다가가 단검 기습을 넣고, 주문서는 투명화가 필요한 순간까지 아껴 둡니다. 암살자 이후엔 9턴 투명으로 4단계 마음가짐을 쌓아 먼 적에게 점멸해 즉사시키고, 망토·식사로 투명화를 재충전합니다. 후반엔 연막탄으로 이탈과 다음 마음가짐을 동시에 챙깁니다.",
+      "playstyleTag": "추정"
+    },
+    {
+      "subclass": "FREERUNNER",
+      "title": "투척 프리러너",
+      "concept": "가벼운 갑옷에 남는 힘을 회피로 바꾸고, 프리러닝 중 투척 무기 정확성·피해를 끌어올려 거리를 두고 싸웁니다.",
+      "talents": [
+        { "id": "PROTECTIVE_SHADOWS", "points": 2, "why": "투명화 중 매 턴 방어막 1, 최대 5", "tag": "설명문 기준", "quote": "+2: 투명화 상태가 되면 매 턴마다 1 의 방어막, 최대 5" },
+        { "id": "SUCKER_PUNCH", "points": 2, "why": "첫 기습 +2, 초반 피해 보강", "tag": "설명문 기준", "quote": "+2: 적을 처음 기습할 때 2 만큼의 추가 피해" },
+        { "id": "CACHED_RATIONS", "points": 1, "why": "보급 식량 2개, 체력 5·망토 충전 1", "tag": "설명문 기준", "quote": "+1: 보급 식량을 최대 2개; 5의 체력을 회복하고 그림자의 망토를 1만큼 충전" },
+        { "id": "MYSTICAL_MEAL", "points": 2, "why": "식사 시 유물 충전 5턴", "tag": "설명문 기준", "quote": "+2: 식사 시 5 턴의 유물 충전 효과" },
+        { "id": "INSCRIBED_STEALTH", "points": 2, "why": "주문서마다 투명화 5턴, 은신 가속과 연계", "tag": "설명문 기준", "quote": "+2: 주문서, 주문을 사용한 이후 5턴의 투명화" },
+        { "id": "SILENT_STEPS", "points": 2, "why": "잠든 적을 깨우지 않고 이동하며 가속력 축적", "tag": "설명문 기준", "quote": "+2: 적에게 근접하지 않는 한 자고 있는 적을 깨우지 않음" },
+        { "id": "EVASIVE_ARMOR", "points": 3, "why": "가죽 +6(요구 힘 9)·힘 18이면 프리러닝 회피 +27", "tag": "코드 계산", "quote": "heroLvl/2 + excessArmorStr*EVASIVE_ARMOR = …+ 9*3 (core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Momentum.java:121)" },
+        { "id": "PROJECTILE_MOMENTUM", "points": 3, "why": "프리러닝 중 투척 정확성 +150%, 피해 +45%", "tag": "설명문 기준", "quote": "+3: 투척 무기에 +150%의 정확성과 +45%의 피해량" },
+        { "id": "SPEEDY_STEALTH", "points": 2, "why": "은신 중 가속력 턴당 2, 은신 중 프리러닝 시간 유지", "tag": "설명문 기준", "quote": "+2: 은신 중에 매 턴마다 2의 가속력; 은신 중일 때는 프리러닝 지속 시간이 감소하지 않음" },
+        { "id": "DEATHLY_DURABILITY", "points": 4, "why": "표식 적 사망 시 표식 시점 체력의 50% 방어막", "tag": "설명문 기준", "quote": "+4: 해당 적이 표식에 걸린 시점의 체력의 50% 만큼 방어막" },
+        { "id": "DOUBLE_MARK", "points": 2, "why": "한 턴 두 번째 표식 50% 절약, 2마리 동시 처리", "tag": "설명문 기준", "quote": "+2: 두 번째 표식은 50% 적은 충전량" },
+        { "id": "HEROIC_ENERGY", "points": 4, "why": "표식 25 충전 → 15", "tag": "설명문 기준", "quote": "+4: 방어구 능력 사용에 드는 충전량이 40% 감소" }
+      ],
+      "bonus": [
+        { "tier": 3, "id": "ENHANCED_RINGS", "points": 2, "why": "망토 사용 시 반지 6턴 +1", "tag": "설명문 기준", "quote": "+2: 반지들의 강화 수치가 6 턴 동안 +1" },
+        { "tier": 4, "id": "FEAR_THE_REAPER", "points": 2, "why": "표식 대상 체력 0 시 공포·불구로 마무리 전 위협 제거", "tag": "설명문 기준", "quote": "+2: 대상을 공포, 불구 상태로" }
+      ],
+      "armorAbility": { "id": "DEATHMARK", "why": "25% 추가 피해가 투척 집중 사격에 붙고, 처치 방어막이 낮은 방어를 메움", "tag": "추정" },
+      "gear": [
+        { "slot": "weapon", "ref": "Scimitar", "why": "+6 요구 힘 11로 가볍고 B DPT 20.85(11위), A 4.21(2위)", "tag": "코드 계산", "quote": "scenario B Scimitar 20.8468 req 11; A 4.2105" },
+        { "slot": "armor", "ref": "LeatherArmor", "why": "천보다 DR 높고(+6: 6-16 vs 6-8) 회피 손해는 힘 2(=회피 6)", "tag": "코드 계산", "quote": "Leather at6 [6,16] req 9; Cloth at6 [6,8] req 7; EVASIVE_ARMOR 3 → 힘 1당 회피 3" },
+        { "slot": "other", "name": "투척용 창·투창", "why": "프리러닝 투척 보너스를 받는 주력 화력", "tag": "추정" },
+        { "slot": "glyph", "ref": "Swiftness", "why": "주변에 적이 없을 때 이동 속도 증가, 거리 벌리기", "tag": "설명문 기준", "quote": "착용자의 근처에 적이 없을 경우 착용자의 이동 속도를 늘려줍니다" },
+        { "slot": "ring", "name": "저격의 반지", "why": "투척 무기 주력이라 직접 강화 효과", "tag": "추정" }
+      ],
+      "playstyle": "초반엔 망토 기습과 투척 무기로 싸우며 갑옷은 가볍게 유지합니다. 프리러너 이후엔 이동으로 가속력을 쌓아 프리러닝 중 높은 회피로 버티며 투척 무기를 퍼붓습니다. 후반엔 죽음의 표식으로 위험한 적을 먼저 지우고 처치 방어막으로 반격을 받아냅니다.",
+      "playstyleTag": "추정"
+    }
+  ]
+}

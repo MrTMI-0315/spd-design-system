@@ -1,0 +1,345 @@
+{
+  "class": "WARRIOR",
+  "summary": "부러진 인장의 방어막과 힘 보너스(철인)로 무거운 무기·갑옷을 일찍 드는 정면 돌파형 직업입니다. 강화는 갑옷과 주무기 한 자루에 몰아줍니다.",
+  "summaryTag": "추정",
+  "subclassVerdict": {
+    "pick": "BERSERKER",
+    "why": "광포화 방어막이 (8+2×갑옷 강화)×최대 3배로 갑옷 강화만으로 커져 운영이 단순함",
+    "tag": "추정"
+  },
+  "builds": [
+    {
+      "subclass": "BERSERKER",
+      "title": "판금 광전사",
+      "concept": "갑옷에 강화를 몰아 광포화 방어막을 키우고, 철인으로 힘을 올려 특대 도끼를 듭니다. 위기에는 불사의 분노로 한 번 더 버팁니다.",
+      "talents": [
+        {
+          "id": "IRON_WILL",
+          "points": 2,
+          "why": "인장 방어막(3+2×갑옷 티어)에 +2, 초반 천 갑옷 기준 5→7",
+          "tag": "코드 계산",
+          "quote": "maxShield = 3 + 2*armTier + IRON_WILL (core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/BrokenSeal.java:97)"
+        },
+        {
+          "id": "PROVOKED_ANGER",
+          "points": 2,
+          "why": "인장·광포화 방어막이 깨질 때마다 다음 공격 +5",
+          "tag": "설명문 기준",
+          "quote": "+2: 방어막이 공격을 받아 사라지면 다음 물리 공격의 피해량이 5 증가"
+        },
+        {
+          "id": "HEARTY_MEAL",
+          "points": 1,
+          "why": "저체력 식사 회복, 초반 체력이 낮을 때 비중이 큼",
+          "tag": "설명문 기준",
+          "quote": "+1: 체력이 33% 이하일 때 음식을 먹으면 4의 체력을 회복"
+        },
+        {
+          "id": "LETHAL_MOMENTUM",
+          "points": 2,
+          "why": "막타가 턴을 쓰지 않아 다수전에서 맞는 횟수가 줄어듦",
+          "tag": "설명문 기준",
+          "quote": "+2: 적을 처치하는 마지막 물리 공격이 100% 확률로 턴을 소모하지 않음"
+        },
+        {
+          "id": "LIQUID_WILLPOWER",
+          "points": 2,
+          "why": "물약마다 최대 체력 10% 방어막, 분노 자극과 연계",
+          "tag": "설명문 기준",
+          "quote": "+2: 물약 등을 마시거나 던진 이후 최대 체력의 10%에 해당하는 방어막"
+        },
+        {
+          "id": "RUNIC_TRANSFERENCE",
+          "points": 2,
+          "why": "판금으로 갈아탈 때 강력한 상형문자까지 옮겨 갑옷 투자 보존",
+          "tag": "설명문 기준",
+          "quote": "+2: 평범한, 강력한, 저주 상형문자를 옮길 수 있음"
+        },
+        {
+          "id": "STRONGMAN",
+          "points": 3,
+          "why": "힘 18에서 +3(21) → 특대 도끼 초과 힘 피해와 판금 요구 힘 해결",
+          "tag": "코드 계산",
+          "quote": "floor(STR*(0.03+0.05*3)) = floor(18*0.18) = 3 (core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/Hero.java:288)"
+        },
+        {
+          "id": "ENDLESS_RAGE",
+          "points": 3,
+          "why": "분노 상한 150% → 광포화 방어막 1.5배, 회복 시간 0.5배",
+          "tag": "코드 계산",
+          "quote": "maxPower = 1 + 0.1667*3; shieldMultiplier *= power; recovery *= 2 - power (core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Berserk.java:211-217, :238)"
+        },
+        {
+          "id": "DEATHLESS_FURY",
+          "points": 2,
+          "why": "치명타를 광포화로 바꿈, 2레벨마다 재사용",
+          "tag": "코드 계산",
+          "quote": "levelRecovery = 4 - DEATHLESS_FURY = 2 (core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Berserk.java:198)"
+        },
+        {
+          "id": "BODY_SLAM",
+          "points": 4,
+          "why": "착지 피해 4-16+방어력 100%, 판금 +6(6-40)이면 평균 약 33",
+          "tag": "코드 계산",
+          "quote": "heroDamageIntRange(4,16) + drRoll*0.25*4 (core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/warrior/HeroicLeap.java:102-103); 판금 +6 DR 6-40 평균 23 + 10"
+        },
+        {
+          "id": "IMPACT_WAVE",
+          "points": 2,
+          "why": "착지 후 3칸 밀쳐내 광포화 회복 중 거리 확보",
+          "tag": "설명문 기준",
+          "quote": "+2: 근접한 모든 적들은 3타일 만큼 밀려나며, 50% 확률로 5턴간 취약"
+        },
+        {
+          "id": "HEROIC_ENERGY",
+          "points": 4,
+          "why": "도약 35 충전 → 21, 탈출·진입 횟수 증가",
+          "tag": "설명문 기준",
+          "quote": "+4: 방어구 능력 사용에 드는 충전량이 40% 감소"
+        }
+      ],
+      "bonus": [
+        {
+          "tier": 3,
+          "id": "DEATHLESS_FURY",
+          "points": 1,
+          "why": "3포인트면 매 레벨마다 불사 재사용",
+          "tag": "설명문 기준",
+          "quote": "+3: 이 효과를 다시 사용하려면 영웅 레벨을 1 올려야"
+        },
+        {
+          "tier": 3,
+          "id": "ENRAGED_CATALYST",
+          "points": 1,
+          "why": "마법 발동률에 분노 비례로 가산(곱이 아닌 덧셈)",
+          "tag": "코드 계산",
+          "quote": "chance + min(1,power)*0.15*pts (core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Berserk.java:169)"
+        },
+        {
+          "tier": 4,
+          "id": "DOUBLE_JUMP",
+          "points": 2,
+          "why": "연속 도약 충전 30% 절약",
+          "tag": "설명문 기준",
+          "quote": "+2: 3턴 이내에 다시 도약할 경우 30% 적은 충전량"
+        }
+      ],
+      "armorAbility": {
+        "id": "HEROICLEAP",
+        "why": "몸통 박치기가 갑옷 방어력에 비례해 갑옷 몰빵과 맞고, 광포화 후 이탈 수단",
+        "tag": "추정"
+      },
+      "gear": [
+        {
+          "slot": "weapon",
+          "ref": "Sword",
+          "why": "A(힘 14) DPT 4.56로 1위, 요구 힘 14 그대로 사용",
+          "tag": "코드 계산",
+          "quote": "scenario A Sword dpt 4.5633"
+        },
+        {
+          "slot": "weapon",
+          "ref": "Greataxe",
+          "why": "후반 B DPT 30.70 1위, +6 요구 힘 17. A에선 0.47로 최하위라 후반 전용",
+          "tag": "코드 계산",
+          "quote": "scenario B Greataxe dpt 30.7016 (req 17); A dpt 0.4689 (req 20)"
+        },
+        {
+          "slot": "armor",
+          "ref": "PlateArmor",
+          "why": "+6 DR 6-40, 광포화 방어막도 강화당 +2",
+          "tag": "코드 계산",
+          "quote": "PlateArmor at6 [6,40]; baseShield = 8 + 2*armor.buffedLvl (core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Berserk.java:220-224)"
+        },
+        {
+          "slot": "enchantment",
+          "ref": "Vampiric",
+          "why": "잃은 체력에 비례해 발동, 저체력을 오래 버티는 광전사와 맞음",
+          "tag": "코드 계산",
+          "quote": "proc = 0.05 + 0.25*missingPercent → 체력 30%면 22.5%"
+        },
+        {
+          "slot": "glyph",
+          "ref": "Thorns",
+          "why": "많이 맞는 운영이라 반격 출혈 발동 기회가 많음, +6 발동률 44%",
+          "tag": "코드 계산",
+          "quote": "(level+2)/(level+12): +0 16.7%, +6 44.4%"
+        },
+        {
+          "slot": "ring",
+          "name": "힘의 반지",
+          "why": "힘과 최대 체력을 함께 올려 특대 도끼 요구 힘을 앞당김",
+          "tag": "추정"
+        }
+      ],
+      "playstyle": "초반엔 검·인장 방어막으로 정면 교전하고 강화는 갑옷에 우선 넣습니다. 텐구 이후 광전사로 분노 100%에서 광포화해 위기를 넘기고, 철인으로 힘이 오르면 특대 도끼로 갈아탑니다. 후반엔 영웅의 도약으로 포위를 끊고 몸통 박치기로 착지 피해를 줍니다.",
+      "playstyleTag": "추정"
+    },
+    {
+      "subclass": "GLADIATOR",
+      "title": "연속 타격 검투사",
+      "concept": "공격 속도 0.5 무기로 턴당 연속 타격 2를 쌓고, 가르기로 전투 사이에도 유지해 필살기를 연사합니다. 충격파 타격도 연속 타격을 올려 줍니다.",
+      "talents": [
+        {
+          "id": "IRON_WILL",
+          "points": 2,
+          "why": "인장 방어막 +2, 치명적인 방어로 인장을 자주 돌릴수록 이득",
+          "tag": "코드 계산",
+          "quote": "maxShield = 3 + 2*armTier + IRON_WILL (core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/BrokenSeal.java:97)"
+        },
+        {
+          "id": "PROVOKED_ANGER",
+          "points": 2,
+          "why": "인장 방어막이 깨질 때 다음 공격 +5",
+          "tag": "설명문 기준",
+          "quote": "+2: 방어막이 공격을 받아 사라지면 다음 물리 공격의 피해량이 5 증가"
+        },
+        {
+          "id": "HEARTY_MEAL",
+          "points": 1,
+          "why": "저체력 식사 회복, 초반 생존 보조",
+          "tag": "설명문 기준",
+          "quote": "+1: 체력이 33% 이하일 때 음식을 먹으면 4의 체력을 회복"
+        },
+        {
+          "id": "LETHAL_MOMENTUM",
+          "points": 2,
+          "why": "막타가 턴을 쓰지 않아 연속 타격 유지에 유리",
+          "tag": "설명문 기준",
+          "quote": "+2: 적을 처치하는 마지막 물리 공격이 100% 확률로 턴을 소모하지 않음"
+        },
+        {
+          "id": "LIQUID_WILLPOWER",
+          "points": 2,
+          "why": "물약마다 최대 체력 10% 방어막",
+          "tag": "설명문 기준",
+          "quote": "+2: 물약 등을 마시거나 던진 이후 최대 체력의 10%에 해당하는 방어막"
+        },
+        {
+          "id": "RUNIC_TRANSFERENCE",
+          "points": 2,
+          "why": "판금으로 갈아탈 때 상형문자 유지",
+          "tag": "설명문 기준",
+          "quote": "+2: 평범한, 강력한, 저주 상형문자를 옮길 수 있음"
+        },
+        {
+          "id": "STRONGMAN",
+          "points": 3,
+          "why": "힘 18→21, 돌 건틀릿·판금 요구 힘과 충격파 피해를 함께 올림",
+          "tag": "코드 계산",
+          "quote": "floor(18*0.18) = 3, STR() 안에서 적용 (core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/Hero.java:287-288)"
+        },
+        {
+          "id": "ENHANCED_COMBO",
+          "points": 3,
+          "why": "7콤보 밀쳐내기 강화, 9콤보 다중 받아치기, 필살기 도약",
+          "tag": "설명문 기준",
+          "quote": "+3: 메치기, 으깨기, 분노 폭발을 사용할 때 연속 타격/3 개의 타일을 도약"
+        },
+        {
+          "id": "CLEAVE",
+          "points": 2,
+          "why": "처치 후 연속 타격 유지 15→45턴, 다음 적까지 콤보를 들고 감",
+          "tag": "코드 계산",
+          "quote": "comboTime = 15 + 15*CLEAVE (core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Combo.java:99)"
+        },
+        {
+          "id": "SHOCK_FORCE",
+          "points": 4,
+          "why": "힘 21에서 충격파 평균 24×1.8≈43(DR 전), 100% 기절",
+          "tag": "코드 계산",
+          "quote": "heroDamageIntRange(5+(STR-10), 10+2*(STR-10)) * (1+0.2*4) (core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/warrior/Shockwave.java:116-118)"
+        },
+        {
+          "id": "STRIKING_WAVE",
+          "points": 4,
+          "why": "맞은 적마다 무기 마법 발동+연속 타격 1, 다수에게 쓰면 콤보 급증",
+          "tag": "코드 계산",
+          "quote": "Random.Int(10) < 3*4 → 100%; 검투사면 Combo.hit (core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/hero/abilities/warrior/Shockwave.java:125-132)"
+        },
+        {
+          "id": "HEROIC_ENERGY",
+          "points": 2,
+          "why": "충격파 35 충전 → 약 27",
+          "tag": "설명문 기준",
+          "quote": "+2: 방어구 능력 사용에 드는 충전량이 23% 감소"
+        }
+      ],
+      "bonus": [
+        {
+          "tier": 3,
+          "id": "CLEAVE",
+          "points": 1,
+          "why": "처치 후 유지 60턴",
+          "tag": "설명문 기준",
+          "quote": "+3: 15턴에서 60턴으로 늘어남"
+        },
+        {
+          "tier": 3,
+          "id": "LETHAL_DEFENSE",
+          "points": 1,
+          "why": "필살기 처치 시 인장 재사용 대기 50턴 감소",
+          "tag": "코드 계산",
+          "quote": "reduceCooldown(pts/3) × COOLDOWN_START 150 (core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/actors/buffs/Combo.java:416-417, core/src/main/java/com/shatteredpixel/shatteredpixeldungeon/items/BrokenSeal.java:359)"
+        },
+        {
+          "tier": 4,
+          "id": "EXPANDING_WAVE",
+          "points": 2,
+          "why": "범위 7칸·90도로 넓혀 한 번에 맞히는 적 수 증가",
+          "tag": "설명문 기준",
+          "quote": "+2: 거리 7타일, 폭 90도"
+        }
+      ],
+      "armorAbility": {
+        "id": "SHOCKWAVE",
+        "why": "철인으로 오른 힘이 피해에 그대로 들어가고, 충격파 타격이 연속 타격을 쌓아 줌",
+        "tag": "추정"
+      },
+      "gear": [
+        {
+          "slot": "weapon",
+          "ref": "Sai",
+          "why": "A DPT 3.27(검 4.56보다 낮음)이지만 공격 지연 0.5라 턴당 콤보 2",
+          "tag": "코드 계산",
+          "quote": "scenario A Sai dpt 3.2659, delay 0.5; Sword 4.5633"
+        },
+        {
+          "slot": "weapon",
+          "ref": "Gauntlet",
+          "why": "B DPT 26.53(4위)에 공격 지연 0.5, +6 요구 힘 15. A에선 0.77이라 후반용",
+          "tag": "코드 계산",
+          "quote": "scenario B Gauntlet dpt 26.5323 delay 0.5 req 15; A dpt 0.7734 (req 18)"
+        },
+        {
+          "slot": "armor",
+          "ref": "PlateArmor",
+          "why": "4콤보 필살기가 방어력 비례, +6 DR 6-40",
+          "tag": "설명문 기준",
+          "quote": "4 연속 타격: 방어력에 비례한 피해를 입힙니다; PlateArmor at6 [6,40]"
+        },
+        {
+          "slot": "enchantment",
+          "ref": "Blazing",
+          "why": "타수가 많고 충격파 타격으로도 발동, +6 발동률 77.8%",
+          "tag": "코드 계산",
+          "quote": "(level+1)/(level+3): +0 33.3%, +6 77.8%"
+        },
+        {
+          "slot": "glyph",
+          "ref": "Viscosity",
+          "why": "받는 피해를 나눠 받아 콤보가 끊기기 전 전투를 길게 끌 수 있음",
+          "tag": "추정"
+        },
+        {
+          "slot": "ring",
+          "name": "분노의 반지",
+          "why": "공격 속도가 곧 연속 타격 속도",
+          "tag": "추정"
+        }
+      ],
+      "playstyle": "초반엔 검이나 쌍차로 근접전을 하며 강화는 무기와 갑옷에 나눕니다. 검투사 이후엔 쌍차·돌 건틀릿으로 턴당 2콤보를 쌓고 가르기로 다음 적까지 이어가 10콤보 연타나 8콤보 범위기로 마무리합니다. 후반엔 충격파로 여러 적을 기절시키며 한 번에 콤보를 채웁니다.",
+      "playstyleTag": "추정"
+    }
+  ]
+}
