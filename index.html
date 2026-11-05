@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SPD 디자인 시스템</title>
+<meta name="description" content="Shattered Pixel Dungeon 소스 코드에서 추출한 디자인 토큰과 UI 컴포넌트 문서 (비공식)">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family: "SPD Pixel"; src: url("assets/pixel_font.ttf") format("truetype"); font-display: swap; }
+
+:root {
+  --z: 3;                         /* PixelScene.defaultZoom: 1 game px = z CSS px */
+  --u: calc(var(--z) * 1px);
+  /* palette straight from the source (see 색상 section) */
+  --white: #FFFFFF;               /* Window.WHITE */
+  --title: #FFFF44;               /* Window.TITLE_COLOR */
+  --shpx: #33BB33;                /* Window.SHPX_COLOR */
+  --menu: #CACFC2;                /* MenuPane version text */
+  --dim: #888888;                 /* TitleScene version text */
+  --toolbar: #7B8073;             /* Toolbar.BGCOLOR / ScrollPane.THUMB_COLOR */
+  --track: #222222;               /* OptionSlider track */
+  --slot: rgba(83, 86, 77, .6);   /* InventorySlot.NORMAL 0x9953564D */
+  --bg: #121211;                  /* page only, not a game token */
+  --font: "SPD Pixel", "Noto Sans KR", sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 16px; }
+body {
+  margin: 0; color: var(--white); font-family: var(--font);
+  font-size: calc(6 * var(--u)); line-height: 1.45;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(123,128,115,.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(123,128,115,.06) 1px, transparent 1px);
+  background-size: calc(16 * var(--u)) calc(16 * var(--u));
+  -webkit-font-smoothing: none;
+}
+a { color: var(--shpx); }
+:focus-visible { outline: 2px solid var(--shpx); outline-offset: 2px; }
+.t5 { font-size: calc(5 * var(--u)); } .t6 { font-size: calc(6 * var(--u)); }
+.t7 { font-size: calc(7 * var(--u)); } .t8 { font-size: calc(8 * var(--u)); }
+.t9 { font-size: calc(9 * var(--u)); } .t12 { font-size: calc(12 * var(--u)); }
+.hl { color: var(--title); }
+.dim { color: var(--dim); }
+.menu { color: var(--menu); }
+code, .mono { font-family: var(--font); color: var(--menu); }
+p { margin: 0 0 calc(4 * var(--u)); max-width: 62ch; }
+
+/* ---------- sprites & 9-patch ---------- */
+.spr {
+  display: inline-block; flex: none; vertical-align: middle;
+  width: calc(var(--w) * var(--u)); height: calc(var(--h) * var(--u));
+  background-repeat: no-repeat;
+  background-position: calc(var(--x) * var(--u) * -1) calc(var(--y) * var(--u) * -1);
+  background-size: calc(var(--sw) * var(--u)) calc(var(--sh) * var(--u));
+  image-rendering: pixelated;
+}
+.ch {
+  border-style: solid; border-image-repeat: stretch; image-rendering: pixelated;
+  border-width: calc(var(--mt) * var(--u)) calc(var(--mr) * var(--u)) calc(var(--mb) * var(--u)) calc(var(--ml) * var(--u));
+}
+
+/* ---------- page layout ---------- */
+.wrap { max-width: 1240px; margin: 0 auto; padding: 0 16px; }
+header.top { padding: calc(14 * var(--u)) 0 calc(8 * var(--u)); }
+.kicker { color: var(--shpx); letter-spacing: .05em; }
+h1 { margin: calc(2 * var(--u)) 0 calc(4 * var(--u)); font-size: calc(12 * var(--u)); line-height: 1.1; color: var(--title); font-weight: 400; }
+.meta { display: flex; flex-wrap: wrap; gap: calc(2 * var(--u)) calc(6 * var(--u)); color: var(--menu); }
+.zoom { display: flex; align-items: center; gap: calc(3 * var(--u)); margin-top: calc(6 * var(--u)); flex-wrap: wrap; }
+.stats { display: flex; flex-wrap: wrap; gap: calc(3 * var(--u)); margin-top: calc(6 * var(--u)); }
+.stat { padding: calc(2 * var(--u)) calc(4 * var(--u)); background: var(--slot); }
+.stat b { color: var(--title); font-weight: 400; margin-right: .4em; }
+
+.layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: calc(6 * var(--u)); padding-bottom: calc(20 * var(--u)); }
+nav.toc { display: flex; gap: calc(2 * var(--u)); overflow-x: auto; position: sticky; top: 0; z-index: 5; padding: 8px 0; background: var(--bg); }
+nav.toc a { white-space: nowrap; text-decoration: none; }
+@media (min-width: 980px) {
+  .layout { grid-template-columns: 200px minmax(0, 1fr); }
+  nav.toc { flex-direction: column; align-self: start; top: 16px; overflow: visible; background: none; padding: 0; }
+}
+
+/* ---------- section window ---------- */
+section.win { margin-bottom: calc(8 * var(--u)); }
+section.win > .inner { padding: calc(4 * var(--u)) calc(3 * var(--u)); }
+.icontitle { display: flex; align-items: center; gap: calc(2 * var(--u)); margin: 0 0 calc(4 * var(--u)); font-size: calc(9 * var(--u)); font-weight: 400; color: var(--title); line-height: 1.2; }
+h3 { font-size: calc(8 * var(--u)); font-weight: 400; color: var(--white); margin: calc(8 * var(--u)) 0 calc(3 * var(--u)); }
+.src { font-size: calc(5 * var(--u)); color: var(--dim); text-decoration: none; word-break: break-all; }
+.src:hover { color: var(--shpx); }
+.prov { display: inline-block; font-size: calc(5 * var(--u)); padding: 0 calc(2 * var(--u)); background: var(--track); color: var(--menu); margin-left: calc(2 * var(--u)); vertical-align: middle; }
+.prov.inf { color: #FF8800; }
+.grid { display: grid; gap: calc(3 * var(--u)); grid-template-columns: repeat(auto-fill, minmax(calc(64 * var(--u)), 1fr)); }
+.card { background: var(--slot); padding: calc(3 * var(--u)); min-width: 0; }
+.row { display: flex; align-items: center; gap: calc(3 * var(--u)); flex-wrap: wrap; }
+.scroll-x { overflow-x: auto; }
+
+table { border-collapse: collapse; width: 100%; font-size: calc(6 * var(--u)); }
+th, td { text-align: left; padding: calc(1.5 * var(--u)) calc(3 * var(--u)) calc(1.5 * var(--u)) 0; vertical-align: top; }
+th { color: var(--menu); font-weight: 400; border-bottom: var(--u) solid var(--track); }
+td { border-bottom: 1px solid rgba(123,128,115,.25); }
+td.num { color: var(--title); }
+
+/* ---------- swatches ---------- */
+.swatch { display: flex; gap: calc(3 * var(--u)); align-items: flex-start; text-align: left; background: var(--slot); padding: calc(2 * var(--u)); border: 0; color: inherit; font: inherit; cursor: pointer; min-width: 0; }
+.chip { flex: none; width: calc(16 * var(--u)); height: calc(16 * var(--u)); box-shadow: inset 0 0 0 1px rgba(255,255,255,.15);
+  background-image: linear-gradient(45deg,#333 25%,transparent 25%,transparent 75%,#333 75%), linear-gradient(45deg,#333 25%,#222 25%,#222 75%,#333 75%);
+  background-size: calc(4 * var(--u)) calc(4 * var(--u)); background-position: 0 0, calc(2 * var(--u)) calc(2 * var(--u)); position: relative; }
+.chip i { position: absolute; inset: 0; }
+.swatch .nm { display: block; }
+.swatch .hx { display: block; color: var(--menu); }
+.swatch .use { display: block; font-size: calc(5 * var(--u)); color: var(--dim); }
+
+/* ---------- typography ---------- */
+.scale-row { display: grid; grid-template-columns: calc(14 * var(--u)) minmax(0,1fr) auto; gap: calc(3 * var(--u)); align-items: baseline; padding: calc(2 * var(--u)) 0; border-bottom: 1px solid rgba(123,128,115,.25); }
+.scale-row .sample { line-height: 1.15; overflow-wrap: anywhere; }
+.playground input { width: 100%; font: inherit; color: var(--white); background: var(--track); border: 0; padding: calc(2 * var(--u)); }
+.log { background: rgba(0,0,0,.53); padding: calc(2 * var(--u)) calc(3 * var(--u)); }
+.log div { line-height: 1.5; }
+
+/* ---------- chrome gallery ---------- */
+.chrome-card { display: flex; flex-direction: column; gap: calc(2 * var(--u)); }
+.chrome-demo { display: flex; flex-wrap: wrap; align-items: flex-end; gap: calc(4 * var(--u)); min-height: calc(40 * var(--u)); }
+.chrome-demo .stretch { width: calc(var(--sw-w) * var(--u)); height: calc(var(--sw-h) * var(--u)); }
+
+/* ---------- icons ---------- */
+.icon-grid { display: grid; gap: calc(2 * var(--u)); grid-template-columns: repeat(auto-fill, minmax(calc(40 * var(--u)), 1fr)); }
+.icon-cell { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: calc(2 * var(--u)); padding: calc(3 * var(--u)) calc(1 * var(--u)) calc(2 * var(--u)); background: var(--slot); min-width: 0; }
+.icon-cell .nm { font-size: calc(5 * var(--u)); color: var(--menu); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.buff-grid { display: grid; gap: calc(1 * var(--u)); grid-template-columns: repeat(auto-fill, minmax(calc(20 * var(--u)), 1fr)); }
+.buff-grid .icon-cell { padding: calc(2 * var(--u)) 0 calc(1 * var(--u)); }
+
+/* ---------- components ---------- */
+.btn { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: calc(2 * var(--u));
+  height: calc(var(--bh, 20) * var(--u)); padding: 0 calc(6 * var(--u)); min-width: calc(30 * var(--u));
+  border: 0; background: none; color: var(--white); font: inherit; font-size: calc(9 * var(--u)); line-height: 1; cursor: pointer; }
+.btn > .bg { position: absolute; inset: 0; }
+.btn > .lbl, .btn > .spr { position: relative; }
+.btn:active > .bg, .btn.pressed > .bg { filter: brightness(1.2); }      /* StyledButton: bg.brightness(1.2f) */
+.btn[aria-disabled="true"] > .lbl, .btn[aria-disabled="true"] > .spr { opacity: .3; } /* enable(false): alpha 0.3 */
+.btn[aria-disabled="true"] { cursor: not-allowed; }
+.btn[aria-pressed="true"] > .lbl { color: var(--title); }
+.btn.checkbox { justify-content: space-between; min-width: calc(80 * var(--u)); padding: 0 calc(4 * var(--u)); }
+.iconbtn { border: 0; background: none; padding: calc(2 * var(--u)); cursor: pointer; }
+.iconbtn:active .spr { filter: brightness(1.5); }                   /* IconButton: icon.brightness(1.5f) */
+
+.slider { position: relative; width: calc(110 * var(--u)); height: calc(26 * var(--u)); }
+.slider > .bg { position: absolute; inset: 0; opacity: .5; }           /* bg RED_BUTTON alpha 0.5 */
+.slider .ttl { position: absolute; top: calc(3 * var(--u)); left: 0; right: 0; text-align: center; font-size: calc(9 * var(--u)); line-height: 1; }
+.slider .track { position: absolute; left: calc(8 * var(--u)); right: calc(8 * var(--u)); bottom: calc(6 * var(--u)); height: var(--u); background: var(--track); }
+.slider .tick { position: absolute; top: calc(-4 * var(--u)); width: var(--u); height: calc(9 * var(--u)); background: var(--track); }
+.slider .knob { position: absolute; top: calc(-3 * var(--u)); width: calc(4 * var(--u)); height: calc(7 * var(--u)); transform: translateX(-50%); }
+.slider.drag .knob { filter: brightness(1.5); }
+.slider input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; margin: 0; }
+.slider .lo, .slider .hi { position: absolute; bottom: calc(-8 * var(--u)); font-size: calc(6 * var(--u)); color: var(--menu); line-height: 1; }
+.slider .lo { left: 0; } .slider .hi { right: 0; }
+
+.toast { position: relative; display: inline-flex; align-items: center; gap: calc(4 * var(--u)); padding: calc(2 * var(--u)) calc(3 * var(--u)); }
+.toast > .bg { position: absolute; inset: 0; }
+.toast > * { position: relative; }
+#toast-host { position: fixed; left: 50%; bottom: 16px; transform: translateX(-50%); z-index: 20; pointer-events: none; transition: opacity .2s; max-width: calc(100vw - 32px); }
+#toast-host[hidden] { display: block; opacity: 0; }
+
+.tooltip { position: fixed; z-index: 30; pointer-events: none; max-width: calc(80 * var(--u)); padding: calc(1 * var(--u)) calc(2 * var(--u)); font-size: calc(6 * var(--u)); line-height: 1.3; opacity: 0; transition: opacity .1s linear; }
+.tooltip.show { opacity: 1; }
+
+.window-demo { width: min(100%, calc(120 * var(--u) + 12 * var(--u))); position: relative; }
+.window-demo .shadow { position: absolute; inset: calc(-4 * var(--u)); opacity: .5; }
+.window-demo .body { position: relative; }
+.window-demo .acts { display: flex; gap: calc(2 * var(--u)); margin-top: calc(4 * var(--u)); }
+.window-demo .acts .btn { flex: 1; min-width: 0; padding: 0; }
+
+.hpbar { position: relative; width: calc(64 * var(--u)); height: calc(2 * var(--u)); background: #AA0000; }
+.hpbar i { position: absolute; left: 0; top: 0; bottom: 0; }
+
+.tag { position: relative; display: inline-flex; align-items: center; justify-content: center; width: calc(24 * var(--u)); height: calc(24 * var(--u)); }
+.tag > .bg { position: absolute; inset: 0; }
+.tag > .spr { position: relative; }
+
+.scrollpane { height: calc(48 * var(--u)); overflow-y: auto; padding-right: calc(3 * var(--u)); scrollbar-width: thin; scrollbar-color: rgba(123,128,115,.5) transparent; }
+.scrollpane::-webkit-scrollbar { width: calc(2 * var(--u)); }
+.scrollpane::-webkit-scrollbar-thumb { background: rgba(123,128,115,.5); }
+.scrollpane::-webkit-scrollbar-thumb:active { background: #7B8073; }
+
+/* ---------- motion ---------- */
+.stage { position: relative; height: calc(48 * var(--u)); background: var(--track); overflow: hidden; display: flex; align-items: center; justify-content: center; gap: calc(16 * var(--u)); }
+.stage .fade { position: absolute; inset: 0; background: #000; opacity: 0; pointer-events: none; }
+.flash { filter: brightness(0) invert(1); }
+.buff-pop { position: absolute; pointer-events: none; }
+
+pre.code { background: var(--track); padding: calc(3 * var(--u)); overflow: auto; font-size: calc(5 * var(--u)); line-height: 1.5; color: var(--menu); max-height: calc(110 * var(--u)); margin: 0 0 calc(3 * var(--u)); }
+
+footer { color: var(--dim); font-size: calc(5 * var(--u)); padding: calc(8 * var(--u)) 0 calc(16 * var(--u)); border-top: var(--u) solid var(--track); }
+footer p { max-width: 90ch; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .tooltip { transition: none; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="kicker t6">SHATTERED PIXEL DUNGEON · 비공식 문서</div>
+    <h1>디자인 시스템</h1>
+    <p class="menu">게임 소스 코드에서 색상, 글꼴, 9-patch 프레임, 아이콘, 컴포넌트, 모션 값을 그대로 뽑았습니다. 이 페이지의 프레임과 아이콘은 모두 원본 PNG를 잘라 그린 것이고, 값마다 원본 코드 줄로 가는 링크가 달려 있습니다.</p>
+    <div class="meta t6" id="meta"></div>
+    <div class="zoom" role="group" aria-label="픽셀 배율">
+      <span class="menu">배율 <code>defaultZoom</code></span>
+      <span id="zoom-btns" class="row"></span>
+    </div>
+    <div class="stats" id="stats"></div>
+  </header>
+
+  <div class="layout">
+    <nav class="toc t6" aria-label="목차" id="toc"></nav>
+    <main>
+      <section class="win" id="foundations" data-title="기본 원리" data-icon="DISPLAY_LAND">
+        <p>SPD 화면은 모두 <span class="hl">게임 픽셀</span> 단위로 짜여 있습니다. 실제 화면에는 <code>PixelScene.defaultZoom</code>배로 확대해서 그리고, 좌표는 <code>align()</code>으로 정수 화면 픽셀에 맞춥니다. 이 페이지도 같은 방식이라 위의 배율을 바꾸면 전체가 함께 커지고 작아집니다.</p>
+        <div id="screens"></div>
+      </section>
+
+      <section class="win" id="colors" data-title="색상" data-icon="ALCHEMY">
+        <p>UI 색은 이름 붙은 상수로 정의되어 있고, 텍스트와 이미지에는 <code>hardlight(color)</code>로 입힙니다. 견본을 누르면 hex 값이 복사됩니다.</p>
+        <div id="color-groups"></div>
+      </section>
+
+      <section class="win" id="type" data-title="타이포그래피" data-icon="SCROLL_COLOR">
+        <p>라틴 문자는 <code>pixel_font.ttf</code>로 그립니다. 한글·한자·가나는 <code>getGeneratorForString</code>이 별도 폰트로 넘깁니다(데스크톱은 Droid Sans, 안드로이드는 Noto Sans CJK, 그다음 NanumGothic, 그다음 NotoSansKR 순). 이 페이지도 <code>"SPD Pixel", "Noto Sans KR"</code> 순서로 지정해서 같은 방식으로 섞어 씁니다.</p>
+        <h3>크기 단계 <span class="prov">코드 집계</span></h3>
+        <div id="type-scale"></div>
+        <h3>강조 마크업</h3>
+        <p><code>RenderedTextBlock</code>은 <code>_</code>나 <code>**</code>를 만날 때마다 강조를 켜고 끕니다. 강조색은 <code>Window.TITLE_COLOR</code>입니다.</p>
+        <div class="playground card">
+          <label for="markup-in" class="t5 dim">직접 입력해 보세요</label>
+          <input id="markup-in" value="이 회복약은 _체력을 급속도로 회복_시키며 많은 상태 이상을 치료합니다.">
+          <div id="markup-out" class="t6" style="margin-top:calc(3*var(--u))"></div>
+        </div>
+        <h3>게임 로그 채널</h3>
+        <p><code>GLog</code>는 메시지 앞의 접두어로 색을 정하고, <code>GameLog</code>가 접두어를 떼고 <code>CharSprite</code> 색을 입힙니다.</p>
+        <div id="glog"></div>
+      </section>
+
+      <section class="win" id="chrome" data-title="표면 (9-patch)" data-icon="BACKPACK_LRG">
+        <p>창, 버튼, 토스트, 탭은 모두 <code>chrome.png</code> (128×64) 한 장에서 잘라 쓰는 9-patch입니다. 가장자리(margin)는 그대로 두고 가운데만 늘립니다. 아래 슬라이더로 늘린 크기를 바꿔 볼 수 있습니다.</p>
+        <div id="chrome-ctrl" style="margin-bottom:calc(12*var(--u))"></div>
+        <div id="chrome-grid" class="grid"></div>
+      </section>
+
+      <section class="win" id="icons" data-title="아이콘" data-icon="MAGNIFY">
+        <p><code>Icons.java</code>의 enum 하나가 <code>icons.png</code> (256×128)의 사각형 하나에 대응합니다. 크기는 아이콘마다 다릅니다. 마우스를 올리면 툴팁 컴포넌트가 실제 코드와 같은 지연(0.5초)으로 나타납니다.</p>
+        <div id="icon-grid" class="icon-grid"></div>
+        <h3>버프 아이콘</h3>
+        <p><code>BuffIndicator</code>의 번호가 격자 칸을 가리킵니다. 작은 시트는 7px 칸, 큰 시트는 16px 칸이고, 위치는 <code>x = (i % cols) × cell</code>, <code>y = ⌊i / cols⌋ × cell</code>입니다. 일부 아이콘은 게임 안에서 <code>tintIcon()</code>으로 색이 바뀝니다.</p>
+        <div id="buff-ctrl" class="row" style="margin-bottom:calc(3*var(--u))"></div>
+        <div id="buff-grid" class="buff-grid"></div>
+      </section>
+
+      <section class="win" id="components" data-title="컴포넌트" data-icon="PREFS">
+        <p>위의 토큰을 조합한 UI 부품입니다. 크기, 상태 변화, 쓰는 9-patch를 모두 코드에서 가져왔습니다.</p>
+        <div id="comp-grid" class="grid" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,calc(150*var(--u))),1fr))"></div>
+      </section>
+
+      <section class="win" id="layout" data-title="간격 · 레이아웃" data-icon="DISPLAY_PORT">
+        <p>간격과 크기는 창마다 상수로 따로 선언되어 있어서, 공통 규칙은 선언 빈도로 읽어야 합니다. 아래 표는 <code>windows/</code>, <code>ui/</code>, <code>scenes/</code>의 선언을 정규식으로 센 값입니다.</p>
+        <div id="layout-tables" class="grid" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,calc(90*var(--u))),1fr))"></div>
+      </section>
+
+      <section class="win" id="motion" data-title="모션" data-icon="TARGET">
+        <p>시간 값은 모두 코드 상수입니다. 버튼을 누르면 같은 값으로 재생됩니다.</p>
+        <div id="motion"></div>
+      </section>
+
+      <section class="win" id="export" data-title="토큰 내보내기" data-icon="COPY">
+        <p><code>tools/extract.py</code>가 SPD 소스를 읽어 <code>tokens.json</code>을 만듭니다. 아래 CSS 변수는 그 JSON으로 만든 것입니다.</p>
+        <pre class="code" id="css-vars"></pre>
+        <div class="row" id="export-btns"></div>
+      </section>
+    </main>
+  </div>
+
+  <footer>
+    <p>Shattered Pixel Dungeon은 Evan Debenham이 만들었고 GPLv3로 공개되어 있습니다(원작 Pixel Dungeon: Watabou). 이 페이지에 쓴 이미지와 폰트는 <a href="https://github.com/00-Evan/shattered-pixel-dungeon">원본 저장소</a>에서 가져왔으며, 저장소의 라이선스 사본은 <a href="LICENSE-SPD.txt">LICENSE-SPD.txt</a>에 있습니다. 공식 문서가 아니며, 개발자와 관련이 없습니다.</p>
+    <p id="foot-meta"></p>
+  </footer>
+</div>
+<div id="toast-host" hidden aria-live="polite"></div>
+<div class="tooltip" id="tooltip" role="tooltip"></div>
+<script src="tokens.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
